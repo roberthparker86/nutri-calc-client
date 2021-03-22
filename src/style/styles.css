@@ -1,0 +1,500 @@
+:root {
+  --white: #f7f7ee;
+  --xl-green: #edf9dd;
+  --l-green: #b7e184;
+  --green: #93d147;
+  --d-green: #619523;
+  --d-blue: #0b3333;
+  --xl-orange: #fbf4c6;
+  --l-orange: #fab861;
+  --orange: #f97615;
+  --d-orange: #c75905;
+  --black: #041111;
+  --d-gray: #2f3737;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+*:focus {
+  outline: none;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid var(--l-orange);
+}
+
+html {
+  font-size: 62.5%;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  background-color: var(--white);
+  color: var(--d-blue);
+  font-family: "Lato", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  min-height: 100vh;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  border-radius: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-transform: none;
+}
+
+button:not(:disabled),
+[type="button"]:not(:disabled) {
+  cursor: pointer;
+}
+
+.App {
+  opacity: 100%;
+  padding-bottom: 6.4rem;
+  height: 100%;
+}
+
+.main {
+  margin: 0 auto;
+  padding: 2.4rem 0;
+  width: 100%;
+}
+
+h3 {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 2.4rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+hr {
+  color: var(--d-gray);
+  margin-top: 2.4rem;
+  opacity: 0.25;
+}
+
+label {
+  display: inline;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+form {
+  color: var(--d-gray);
+}
+
+/***** HEADER & FOOTER *****/
+.header {
+  background-image: linear-gradient(var(--l-green), var(--green));
+  padding: 1.2rem;
+}
+
+.header h1 {
+  color: var(--white);
+  display: inline-block;
+  font-family: "Nobile", sans-serif;
+  font-size: 3.6rem;
+  letter-spacing: 0.112rem;
+  line-height: 1.25;
+  text-shadow: -0.2rem 0.2rem var(--d-green);
+  margin: 0;
+  padding: 0;
+}
+
+footer {
+  text-align: center;
+  background-color: var(--green);
+  padding: 1rem 0;
+  position: absolute;
+  bottom: 0;
+}
+
+footer p {
+  font-weight: 400;
+  font-size: 1.2rem;
+  display: inline-block;
+  margin-right: 0.8rem;
+}
+
+.footer-icon {
+  font-size: 125%;
+  margin-right: 0.8rem;
+}
+
+footer,
+.header {
+  min-width: 100%;
+}
+
+/***** SMALL BTN BLOCK *****/
+.sm-btn {
+  border-radius: 5rem;
+  color: var(--white);
+  font-size: 3rem;
+  font-family: monospace;
+  font-weight: 700;
+  height: 4.5rem;
+  line-height: 3rem;
+  margin: 0 auto;
+  padding: 0.6rem 0 0;
+  position: absolute;
+  right: 2.25rem;
+  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+  text-align: center;
+  top: -2.25rem;
+  vertical-align: middle;
+  width: 4.5rem;
+  z-index: 2;
+}
+
+/* Add Recipe Button */
+.sm-btn--add {
+  background-color: var(--orange);
+  margin: 0;
+  left: 2.25rem;
+}
+
+.sm-btn--add:hover {
+  background-color: var(--l-orange);
+}
+
+/* Close Window Btn */
+.sm-btn--close {
+  background-color: var(--green);
+}
+
+.sm-btn--close:hover {
+  background-color: var(--l-orange);
+}
+
+/***** LARGER BTN BLOCK *****/
+.btn {
+  background-color: var(--green);
+  border: none;
+  border-radius: 5rem;
+  display: block;
+  font-size: 1.6rem;
+  font-weight: bold;
+  line-height: 1.5;
+  margin: 0 auto 1.6rem;
+  padding: 0.5rem 1.5rem;
+  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+}
+
+.btn:hover {
+  color: var(--white);
+  background-color: var(--l-orange);
+  border-color: var(--l-orange);
+}
+
+.btn,
+.sm-btn {
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.25);
+}
+
+/* Edit Btn */
+.btn--edit {
+  background-color: var(--orange);
+  border: none;
+  color: var(--white);
+  font-size: 120%;
+  margin: 0;
+  padding: 0.75rem 1.5rem;
+  position: absolute;
+  transform: translate(-50%, 50%);
+  bottom: 0;
+  left: 50%;
+}
+
+.btn--edit:hover {
+  color: var(--white);
+}
+
+/* Done & Next Btn */
+.btn--next,
+.btn--done {
+  background-color: var(--orange);
+  bottom: 0;
+  color: var(--white);
+  margin: 0;
+  position: absolute;
+  transform: translate(0, 50%);
+}
+
+.btn--next {
+  left: 20%;
+}
+
+.btn--done {
+  right: 20%;
+}
+
+/***** SCROLLBAR *****/
+::-webkit-scrollbar {
+  width: 1.2rem;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--xl-green);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--green);
+  border-radius: 0.2rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--l-green);
+}
+
+/***** WINDOW BLOCK *****/
+.window {
+  background-color: var(--xl-green);
+  border: 0.1rem solid rgba(47, 55, 55, 0.25);
+  border-radius: 0.3rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+  margin: 0 auto;
+  padding: 1.6rem;
+  position: relative;
+  width: 50%;
+}
+
+.window h3 {
+  color: var(--orange);
+  font-size: 2.4rem;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+/* Window Container */
+.window__container {
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+/* Two Column Behavior */
+.window__col {
+  display: inline-block;
+  padding: 0 1.5rem;
+  margin-bottom: 2rem;
+  vertical-align: top;
+  width: 50%;
+}
+
+.window__col--left {
+  text-align: right;
+}
+
+.window__col--centered {
+  text-align: center;
+}
+
+/* Window Recipe List */
+.window--list {
+  padding: 1.6rem 0 0;
+}
+
+.window--list hr {
+  margin-bottom: 0;
+}
+
+.window__item {
+  background-color: var(--xl-green);
+  border: none;
+  border-bottom: 0.1rem solid rgba(47, 55, 55, 0.25);
+  color: var(--d-blue);
+  display: block;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+}
+
+.window__item:hover {
+  background-color: var(--xl-orange);
+}
+
+.window__item:last-child {
+  border: none;
+}
+
+.window__item span {
+  font-weight: bolder;
+}
+
+/* Window Add Recipe */
+.window--add {
+  padding-bottom: 2.4rem;
+}
+
+.window__container--add {
+  max-height: 45vh;
+  overflow-y: auto;
+  padding: 1rem 0;
+}
+
+/* Add Recipe & Add Ingredient Inputs */
+.window__input-container {
+  color: var(--d-blue);
+  margin: 0 0 2rem;
+  padding: 0;
+  width: 100%;
+}
+
+.window__input {
+  background-color: var(--white);
+  border: 1px solid rgba(47, 55, 55, 0.25);
+  color: var(--d-gray);
+  font-family: inherit;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: inherit;
+  padding: 0.5rem;
+}
+
+.window__input--stat {
+  text-align: right;
+  width: 6rem;
+}
+
+.window__input--recipe-name {
+  border-radius: 0.2rem;
+  display: block;
+  width: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Add Recipe & Add Ingredient Labels */
+.window__label--name {
+  color: var(--orange);
+  display: inline-block;
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+h3 .window__label--name,
+.window__label--name {
+  font-size: 2rem !important;
+}
+
+.window__label--lg {
+  background-color: rgba(47, 55, 55, 0.05);
+  border: 1px solid rgba(47, 55, 55, 0.25);
+  border-right: none;
+  border-radius: 0.2rem 0 0 0.2rem;
+  margin-right: -1px;
+  padding: 0.5rem;
+}
+
+.window__label--sm {
+  background-color: rgba(47, 55, 55, 0.05);
+  border: 1px solid rgba(47, 55, 55, 0.25);
+  border-left: none;
+  border-radius: 0 0.2rem 0.2rem 0;
+  font-weight: 700;
+  margin-left: -1px;
+  padding: 0.5rem 1rem;
+}
+
+/* Recipe Info Stat Fields */
+.window__stat {
+  padding: 0 2%;
+}
+
+.window__stat span {
+  font-weight: 700;
+}
+
+/***** MEDIA QUERIES *****/
+
+/* Main Container Breakpoints */
+@media (min-width: 576px) {
+  .main {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .main {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .main {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .main {
+    max-width: 1140px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .window {
+    width: 77%;
+  }
+}
+
+@media (max-width: 768px) {
+  h3,
+  .window h3 {
+    font-size: 2rem;
+  }
+  .window {
+    width: 85%;
+  }
+  .window__col {
+    margin-bottom: 0;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+/***** ANIMATIONS *****/
+@keyframes moveInScale {
+  0% {
+    transform: translateY(-4rem) scale(0.85);
+    opacity: 0;
+  }
+
+  90% {
+    transform: translateY(0.2rem) scale(1.02);
+  }
+
+  100% {
+    transform: translate(0) scale(1);
+    opacity: 1;
+  }
+}

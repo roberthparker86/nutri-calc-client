@@ -38,6 +38,19 @@ export default function App() {
     });
   };
 
+  // New recipe state
+  const [newRecipe, handleNewRecipe] = useState({});
+
+  const updateNewRecipe = (obj) => {
+    const newObj = obj;
+    handleNewRecipe((prev) => {
+      return({
+        ...prev,
+      ...newObj
+      })
+    });
+  };
+
   return (
     <div className="App">
       <Header />
@@ -48,7 +61,7 @@ export default function App() {
         {window.info.show === true ? (
           <RecipeInfo changeState={changeWindow} curId={window.info.id} />
         ) : window.addRec === true ? (
-          <AddRecipe changeState={changeWindow} />
+          <AddRecipe changeState={changeWindow} createRecipe={updateNewRecipe} />
         ) : window.addIngr === true ? (
           <AddIngredient changeState={changeWindow} />
         ) : (
@@ -66,5 +79,12 @@ export default function App() {
 // DONE --- Set up app locally - connect to Nodejs, express, & MongoDB
 // DONE --- Populate recipe list based on MongoDB entries
 // DONE --- Fix data fetching so that React doesn't produce errors
-// Save new object to MongoDB
-// Save new ingredient data to new MongoDB object
+// Create state object for new recipe 
+// Create function to be passed to add windows to update new recipe state
+// Create state object for new ingredient
+// Create function to add new ingredient to new recipe state
+// Create function to get total value of a specific property
+// Create function that takes property total and updates new recipe state
+// Create function for POST operations to add new recipe object to DB
+// Reset newRecipe object after 
+// Refactor code

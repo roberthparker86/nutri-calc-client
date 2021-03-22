@@ -33,7 +33,8 @@ const RecipeInfo = (props) => {
         text="x"
       />
       <hr />
-      <div className="window__container">
+      {/* Display recipe stats */}
+      <div className="window__container window__container--recipe-info">
         <div className="window__col window__col--left">
           <InfoField name="Calories:" value={calories} unit="g" />
           <InfoField name="Protein:" value={protein} unit="g" />

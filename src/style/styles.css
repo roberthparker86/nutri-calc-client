@@ -290,6 +290,10 @@ footer,
   overflow-y: auto;
 }
 
+.window__container--recipe-info {
+  padding-top: 1rem;
+}
+
 /* Two Column Behavior */
 .window__col {
   display: inline-block;
@@ -380,6 +384,7 @@ footer,
 .window__input--recipe-name {
   border-radius: 0.2rem;
   display: block;
+  margin-bottom: 1.5rem;
   width: 100%;
 }
 
@@ -394,16 +399,20 @@ input[type="number"] {
 }
 
 /* Add Recipe & Add Ingredient Labels */
-.window__label--name {
-  color: var(--orange);
+.window__label--name,
+.window__label--serving {
   display: inline-block;
   font-weight: 700;
   margin: 0 0 1rem;
 }
 
-h3 .window__label--name,
 .window__label--name {
+  color: var(--orange);
   font-size: 2rem !important;
+}
+
+.window__label--serving {
+  color: var(--d-gray);
 }
 
 .window__label--lg {

@@ -4,16 +4,18 @@ import SmBtn from "../btn-input/SmBtn.js";
 import { getAllRecipes } from '../../api/index.js';
 
 const RecipeList = (props) => {
-  const { changeState, selectRecipe } = props;
+  const { changeState } = props;
   const [list, handleList ] = useState([]);
 
-  useEffect(async () => {
-    await getAllRecipes().then(recipes => {
-      return (list.length === 0)
-        ? handleList(recipes.data.data)
-        : null;
-    });
-  });
+  useEffect(() => {
+    const fetchList = async () => {
+      const result = await getAllRecipes();
+
+      handleList(result.data.data);
+    };
+
+    fetchList();
+  }, []);
     
   return (
     <div className="window window--list">

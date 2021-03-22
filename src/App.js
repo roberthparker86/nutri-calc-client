@@ -10,21 +10,19 @@ import AddIngredient from "./components/windows/AddIngredient.js";
 export default function App() {
   // Window State
   const [window, handleWindow] = useState({
-    list: true, // Recipe list
-    addRec: false, // Add recipe
+    list: true,     // Recipe list
+    addRec: false,  // Add recipe
     addIngr: false, // Add ingredient
-    info: {
+    info: {         // Recipe Info
       show: false,
       id: ""
     }
   });
 
-  
-
   const changeWindow = (val) => {
-    // Changes window state - pass key: value for desired window to render
+    // Pass key:value pair to change window to render
     const reset = {
-      // Temp object used to reset state values to false
+      // Temp object used to reset values
       list: false,
       addRec: false,
       addIngr: false,
@@ -34,7 +32,7 @@ export default function App() {
       }
     };
     handleWindow({
-      // apply window state reset - overwrite passed value w/ true
+      // apply reset - overwrite passed value w/ true
       ...reset,
       ...val
     });
@@ -63,9 +61,10 @@ export default function App() {
 }
 
 ///// CURRENT TASKS /////
-// 1) DONE --- Refactor current code
-// 2) DONE --- Create new object in test.json when next btn clicked in AddRecipe.js
-// 3) Set up app locally - connect to Nodejs, express, & MongoDB
-// 4) Populate recipe list based on MongoDB entries
-// 5) Save new object to MongoDB
-// 6) Save new ingredient data to new MongoDB object
+// DONE --- Refactor current code
+// DONE --- Create new object in test.json when next btn clicked in AddRecipe.js
+// DONE --- Set up app locally - connect to Nodejs, express, & MongoDB
+// DONE --- Populate recipe list based on MongoDB entries
+// DONE --- Fix data fetching so that React doesn't produce errors
+// Save new object to MongoDB
+// Save new ingredient data to new MongoDB object

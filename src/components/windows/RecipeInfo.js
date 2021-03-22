@@ -11,11 +11,15 @@ const RecipeInfo = (props) => {
   const [recipe, handleRecipe] = useState({});
   const { name, calories, protein, totFat, satFat, unsatFat, carbs, fiber, sugar, sodium, chol, potas } = recipe;
 
-  useEffect(async () => {
-    await getRecipeById(props.curId).then(result => {
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      const result = await getRecipeById(props.curId);
+
       handleRecipe(result.data.data);
-    });
-  });
+    };
+
+    fetchRecipe();
+  }, [props.curId]);
 
   return (
     <div className="window">

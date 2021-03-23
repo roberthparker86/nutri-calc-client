@@ -8,7 +8,7 @@ import RecipeInfo from "./components/windows/RecipeInfo.js";
 import AddIngredient from "./components/windows/AddIngredient.js";
 
 export default function App() {
-  // Window State
+  // Window Hook
   const [window, handleWindow] = useState({
     list: true,     // Recipe list
     addRec: false,  // Add recipe
@@ -38,8 +38,10 @@ export default function App() {
     });
   };
 
-  // New recipe state
-  const [newRecipe, handleNewRecipe] = useState({});
+  // New recipe Hook
+  const [newRecipe, handleNewRecipe] = useState({
+    ingredients: []
+  });
 
   const updateNewRecipe = (obj) => {
     const newObj = obj;

@@ -1,9 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../btn-input/Input.js";
 import LgBtn from "../btn-input/LgBtn.js";
 
 const AddIngredient = (props) => {
   const { changeState } = props;
+
+  // New ingredient Hook
+  const [newIngredient, setNewIngredient] = useState({
+    name: "",
+    calories: "",
+    protein: "",
+    totFat: "",
+    satFat: "",
+    unsatFat: "",
+    carbs: "",
+    fiber: "",
+    sugar: "",
+    sodium: "",
+    chol: "",
+    potas: "",
+    quantity: ""
+  });
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setNewIngredient((prev) => {
+      return {
+        ...prev,
+        [name]: value
+      };
+    });
+  };
+
+  const [list, setList] = useState([]);
+
+  const updateList = (obj) => {
+    const newObj = obj;
+    setList((prev) => {
+      return([...prev, newObj]);
+    });
+  };
 
   return (
     <div className="window window--add">
@@ -17,7 +54,7 @@ const AddIngredient = (props) => {
       <form id="ingredienInfo">
         <div className="window__input-container">
           <h3 className="window__label--name" htmlFor="recipeName">
-            Recipe Name Here
+            {props.newRecipe.name}
           </h3>
         </div>
 
@@ -27,14 +64,20 @@ const AddIngredient = (props) => {
             {/* Ingredient name input */}
             <input
               className="window__input window__input--recipe-name"
-              id="recipeName"
+              id="ingredientName"
+              name="name"
+              value={newIngredient.name}
+              onChange={handleChange}
               placeholder="What's the ingredient name?"
             ></input>
           </div>
           <div className="window__col window__col--centered">
-            {/* Cal Field */}
+            {/* Calories Field */}
             <Input
               id="calInput"
+              name="calories"
+              value={newIngredient.calories}
+              update={handleChange}
               label="Calories:"
               spanID="calInputInline"
               unit="g"
@@ -43,6 +86,9 @@ const AddIngredient = (props) => {
             {/* Protein Field */}
             <Input
               id="proteinInput"
+              name="protein"
+              value={newIngredient.protein}
+              update={handleChange}
               label="Protein:"
               spanID="proteinInputInline"
               unit="g"
@@ -51,6 +97,9 @@ const AddIngredient = (props) => {
             {/* Total Fat Field */}
             <Input
               id="totalFatInput"
+              name="totFat"
+              value={newIngredient.totFat}
+              update={handleChange}
               label="Total Fat:"
               spanID="totalFatInputInline"
               unit="g"
@@ -59,6 +108,9 @@ const AddIngredient = (props) => {
             {/* Sat Fat Field */}
             <Input
               id="satFatInput"
+              name="satFat"
+              value={newIngredient.satFat}
+              update={handleChange}
               label="Saturated Fat:"
               spanID="satFatInputInline"
               unit="g"
@@ -67,32 +119,35 @@ const AddIngredient = (props) => {
             {/* Unsat Fat Field */}
             <Input
               id="unatFatInput"
+              name="unsatFat"
+              value={newIngredient.unsatFat}
+              update={handleChange}
               label="Unsaturated Fat:"
               spanID="unatFatInput"
               unit="g"
             />
 
-            {/* Cholesterol Field */}
-            <Input
-              id="cholesterolInput"
-              label="Cholesterol:"
-              spanID="cholesterolInputInline"
-              unit="mg"
-            />
-          </div>
-
-          <div className="window__col window__col--centered">
             {/* Carbohydrates Field */}
             <Input
               id="carbInput"
+              name="carbs"
+              value={newIngredient.carbs}
+              update={handleChange}
               label="Carbohydrates:"
               spanID="carbInputInline"
               unit="g"
             />
 
+            
+          </div>
+
+          <div className="window__col window__col--centered">
             {/* Fiber Field */}
             <Input
               id="fiberInput"
+              name="fiber"
+              value={newIngredient.fiber}
+              update={handleChange}
               label="Fiber:"
               spanID="fiberInputInline"
               unit="g"
@@ -101,6 +156,9 @@ const AddIngredient = (props) => {
             {/* Sugars Field */}
             <Input
               id="sugarInput"
+              name="sugar"
+              value={newIngredient.sugar}
+              update={handleChange}
               label="Sugar:"
               spanID="sugarInputInline"
               unit="g"
@@ -109,14 +167,31 @@ const AddIngredient = (props) => {
             {/* Sodium Field */}
             <Input
               id="sodiumInput"
+              name="sodium"
+              value={newIngredient.sodium}
+              update={handleChange}
               label="Sodium:"
               spanID="sodiumInputInline"
+              unit="mg"
+            />
+
+            {/* Cholesterol Field */}
+            <Input
+              id="cholesterolInput"
+              name="chol"
+              value={newIngredient.chol}
+              update={handleChange}
+              label="Cholesterol:"
+              spanID="cholesterolInputInline"
               unit="mg"
             />
 
             {/* Potassium Field */}
             <Input
               id="potassiumInput"
+              name="potas"
+              value={newIngredient.potas}
+              update={handleChange}
               label="Potassium:"
               spanID="potassiumInputInline"
               unit="mg"
@@ -125,25 +200,46 @@ const AddIngredient = (props) => {
             {/* Quantity Field */}
             <Input
               id="quantityInput"
+              name="quantity"
+              value={newIngredient.quantity}
+              update={handleChange}
               label="Quantity:"
               spanID="quantityInputInline"
               unit=""
             />
           </div>
         </div>
+        {/* Next btn */}
         <LgBtn
           type="button"
-          class="btn btn--next"
-          click={() => changeState({ addIngr: true })}
+          btnClass="btn btn--next"
+          click={ () => { 
+            updateList(newIngredient);
+
+            setNewIngredient({
+              name: "",
+              calories: "",
+              protein: "",
+              totFat: "",
+              satFat: "",
+              unsatFat: "",
+              carbs: "",
+              fiber: "",
+              sugar: "",
+              sodium: "",
+              chol: "",
+              potas: "",
+              quantity: ""
+            });
+          }}
           text="Next"
         />
 
         <hr className="window__hr--add-bot" />
+        {/* Done Btn */}
         <LgBtn
           btnClass="btn btn--done"
-          click={() => {
-            changeState({ list: true });
-          }}
+          click={ () => { changeState({ list: true }); } }
           text="Done"
         />
       </form>

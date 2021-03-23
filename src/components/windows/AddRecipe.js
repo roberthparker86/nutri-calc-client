@@ -5,7 +5,7 @@ import LgBtn from "../btn-input/LgBtn.js";
 const AddRecipe = (props) => {
   const { changeState, createRecipe } = props;
 
-  const [rName, setRName] = useState({
+  const [newValue, setNewValue] = useState({
     name: "",
     servings: ""
   });
@@ -13,7 +13,7 @@ const AddRecipe = (props) => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    setRName((prev) => {
+    setNewValue((prev) => {
       return {
         ...prev,
         [name]: value
@@ -41,7 +41,7 @@ const AddRecipe = (props) => {
             id="recipeName"
             className="window__input window__input--recipe-name"
             name="name"
-            value={rName.name}
+            value={newValue.name}
             onChange={handleChange}
             placeholder="Whats your recipe called?"
           />
@@ -53,7 +53,7 @@ const AddRecipe = (props) => {
             type="number" 
             className="window__input window__input--recipe-serving" 
             name="servings"
-            value={rName.servings}
+            value={newValue.servings}
             onChange={handleChange}
             placeholder="0"
           />
@@ -63,7 +63,7 @@ const AddRecipe = (props) => {
         <LgBtn
           btnClass="btn btn--next"
           click={() => {
-            createRecipe(rName);
+            createRecipe(newValue);
             changeState({ addIngr: true });
           }}
           text="Next"

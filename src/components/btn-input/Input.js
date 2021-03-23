@@ -9,6 +9,9 @@ const Input = (props) => {
       <input
         type="number"
         id={props.id}
+        name={props.name}
+        value={props.value}
+        onChange={props.update}
         className="window__input window__input--stat"
         placeholder="0"
       ></input>

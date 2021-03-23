@@ -6,8 +6,8 @@ const AddRecipe = (props) => {
   const { changeState, createRecipe } = props;
 
   const [rName, setRName] = useState({
-    id: 0,
-    name: ""
+    name: "",
+    servings: ""
   });
 
   const handleChange = (event) => {
@@ -20,17 +20,6 @@ const AddRecipe = (props) => {
       };
     });
   };
-
-  // const createRecipe = () => {
-  //   setRName((prev) => {
-  //     prev.id = items.length;
-  //     return {
-  //       ...prev
-  //     };
-  //   });
-
-  //   items.push(rName);
-  // };
 
   return (
     <div className="window window--add">
@@ -57,14 +46,16 @@ const AddRecipe = (props) => {
             placeholder="Whats your recipe called?"
           />
           <label className="window__label--serving" htmlFor="servingCount">
-            Amount Of Servings:
+            # Of Servings:
           </label>
           <input 
             id="servingCount"
             type="number" 
-            className="window__input window__input--recipe-name" 
+            className="window__input window__input--recipe-serving" 
             name="servings"
-            placeholder="How many servings are made?"
+            value={rName.servings}
+            onChange={handleChange}
+            placeholder="0"
           />
         </div>
 
@@ -72,8 +63,8 @@ const AddRecipe = (props) => {
         <LgBtn
           btnClass="btn btn--next"
           click={() => {
-            createRecipe();
-            console.log(rName);
+            createRecipe(rName);
+            changeState({ addIngr: true });
           }}
           text="Next"
         />

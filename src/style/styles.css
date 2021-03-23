@@ -381,11 +381,21 @@ footer,
   width: 6rem;
 }
 
-.window__input--recipe-name {
+.window__input--recipe-name,
+.window__input--recipe-serving {
   border-radius: 0.2rem;
-  display: block;
   margin-bottom: 1.5rem;
+}
+
+.window__input--recipe-name {
+  display: block;
   width: 100%;
+}
+
+.window__input--recipe-serving {
+  display: inline-block;
+  margin-left: 1rem;
+  width: 5rem;
 }
 
 input::-webkit-outer-spin-button,

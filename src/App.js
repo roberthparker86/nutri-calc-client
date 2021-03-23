@@ -46,8 +46,8 @@ export default function App() {
     handleNewRecipe((prev) => {
       return({
         ...prev,
-      ...newObj
-      })
+        ...newObj
+      });
     });
   };
 
@@ -63,7 +63,7 @@ export default function App() {
         ) : window.addRec === true ? (
           <AddRecipe changeState={changeWindow} createRecipe={updateNewRecipe} />
         ) : window.addIngr === true ? (
-          <AddIngredient changeState={changeWindow} />
+          <AddIngredient changeState={changeWindow} createRecipe={updateNewRecipe} newRecipe={newRecipe} />
         ) : (
           <RecipeList changeState={changeWindow} />
         )}
@@ -79,8 +79,8 @@ export default function App() {
 // DONE --- Set up app locally - connect to Nodejs, express, & MongoDB
 // DONE --- Populate recipe list based on MongoDB entries
 // DONE --- Fix data fetching so that React doesn't produce errors
-// Create state object for new recipe 
-// Create function to be passed to add windows to update new recipe state
+// DONE --- Create state object for new recipe 
+// DONE --- Create function to be passed to add recipe window to update new recipe state
 // Create state object for new ingredient
 // Create function to add new ingredient to new recipe state
 // Create function to get total value of a specific property

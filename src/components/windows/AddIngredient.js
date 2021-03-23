@@ -4,6 +4,7 @@ import LgBtn from "../btn-input/LgBtn.js";
 
 const AddIngredient = (props) => {
   const { changeState } = props;
+
   return (
     <div className="window window--add">
       <div // Clost btn

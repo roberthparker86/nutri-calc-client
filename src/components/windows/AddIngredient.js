@@ -22,6 +22,12 @@ const AddIngredient = (props) => {
     potas: "",
     quantity: ""
   });
+  // Ingredient list hook
+  const [list, setList] = useState([]);
+  // Done btn click hook
+  const [isClicked, setClick] = useState(false);
+
+  // Update newIngredient state
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -33,22 +39,16 @@ const AddIngredient = (props) => {
     });
   };
 
-  // Ingredient list hook
-  const [list, setList] = useState([]);
-
+  // Update list state
   const updateList = (obj) => {
     const newObj = obj;
 
     setList((prev) => {
       return([...prev, newObj]);
     })
-    return({
-
-    });
   };
 
-  const [isClicked, setClick] = useState(false);
-
+  // Multiply obj property values by quantity vlaue
   const multObjValues = (obj) => {
     const { calories, protein, totFat, satFat, unsatFat, carbs, fiber, sugar, sodium, chol, potas, quantity } = obj;
     return({
@@ -66,6 +66,7 @@ const AddIngredient = (props) => {
     });
   };
 
+  // Return a sum from specified key/values from arr of obj's
   const getKeyTotal = (key, arr) => {
     const tempList = arr.map((obj) => {
       return (obj[key]);
@@ -74,6 +75,7 @@ const AddIngredient = (props) => {
     return tempList.reduce((a, b) => a + b);
   };
 
+  // Return single obj from arr of obj's with sum of values as properties
   const getIngredientTotal = (arr) => {
     const tempList = arr.map((obj) => {
       return (multObjValues(obj));
@@ -94,8 +96,26 @@ const AddIngredient = (props) => {
     });
   };
 
+  const getRecipeTotal = (obj, serv) => {
+    return ({
+      calories: Math.round((obj.calories / serv) * 10) / 10,
+      protein: Math.round((obj.protein / serv) * 10) / 10,
+      totFat: Math.round((obj.totFat / serv) * 10) / 10,
+      satFat: Math.round((obj.satFat / serv) * 10) / 10,
+      unsatFat: Math.round((obj.unsatFat / serv) * 10) / 10,
+      carbs: Math.round((obj.carbs / serv) * 10) / 10,
+      fiber: Math.round((obj.fiber / serv) * 10) / 10,
+      sugar: Math.round((obj.sugar / serv) * 10) / 10,
+      sodium: Math.round((obj.sodium / serv) * 10) / 10,
+      chol: Math.round((obj.chol / serv) * 10) / 10,
+      potas: Math.round((obj.potas / serv) * 10) / 10
+    });
+  };
+
   useEffect(() => {
-    return ((isClicked === true) ? console.log(getIngredientTotal(list)) : null);
+    return ((isClicked === true) 
+      ? console.log(getRecipeTotal(getIngredientTotal(list), newRecipe.servings))
+      : null);
   }, [isClicked]);
 
   return (

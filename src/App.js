@@ -39,9 +39,7 @@ export default function App() {
   };
 
   // New recipe Hook
-  const [newRecipe, handleNewRecipe] = useState({
-    ingredients: []
-  });
+  const [newRecipe, handleNewRecipe] = useState({ });
 
   const updateNewRecipe = (obj) => {
     const newObj = obj;
@@ -52,8 +50,6 @@ export default function App() {
       });
     });
   };
-
-  // console.log(newRecipe);
 
   return (
     <div className="App">

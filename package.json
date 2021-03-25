@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "nutri-calc-ui",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -35,5 +35,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "author": "Robert Parker",
+  "description": "An app that allows one to input the amount of ingredients and their nutritional information for a home recipe, and save the sum nutritional information, per serving, onto a database."
 }

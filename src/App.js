@@ -53,6 +53,8 @@ export default function App() {
     });
   };
 
+  // console.log(newRecipe);
+
   return (
     <div className="App">
       <Header />

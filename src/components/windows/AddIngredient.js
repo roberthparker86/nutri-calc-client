@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../btn-input/Input.js";
 import LgBtn from "../btn-input/LgBtn.js";
+import { insertRecipe } from "../../api/index.js";
 
 const AddIngredient = (props) => {
-  const { changeState } = props;
+  const { changeState, createRecipe, newRecipe } = props;
 
   // New ingredient Hook
   const [newIngredient, setNewIngredient] = useState({
@@ -21,7 +22,6 @@ const AddIngredient = (props) => {
     potas: "",
     quantity: ""
   });
-
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -33,14 +33,70 @@ const AddIngredient = (props) => {
     });
   };
 
+  // Ingredient list hook
   const [list, setList] = useState([]);
 
   const updateList = (obj) => {
     const newObj = obj;
+
     setList((prev) => {
       return([...prev, newObj]);
+    })
+    return({
+
     });
   };
+
+  const [isClicked, setClick] = useState(false);
+
+  const multObjValues = (obj) => {
+    const { calories, protein, totFat, satFat, unsatFat, carbs, fiber, sugar, sodium, chol, potas, quantity } = obj;
+    return({
+      calories: (calories * quantity),
+      protein: (protein * quantity),
+      totFat: (totFat * quantity),
+      satFat: (satFat * quantity),
+      unsatFat: (unsatFat * quantity),
+      carbs: (carbs * quantity),
+      fiber: (fiber * quantity),
+      sugar: (sugar * quantity),
+      sodium: (sodium * quantity),
+      chol: (chol * quantity),
+      potas: (potas * quantity),
+    });
+  };
+
+  const getKeyTotal = (key, arr) => {
+    const tempList = arr.map((obj) => {
+      return (obj[key]);
+    });
+    
+    return tempList.reduce((a, b) => a + b);
+  };
+
+  const getIngredientTotal = (arr) => {
+    const tempList = arr.map((obj) => {
+      return (multObjValues(obj));
+    });
+    
+    return({
+      calories: getKeyTotal("calories", tempList),
+      protein: getKeyTotal("protein", tempList),
+      totFat: getKeyTotal("totFat", tempList),
+      satFat: getKeyTotal("satFat", tempList),
+      unsatFat: getKeyTotal("unsatFat", tempList),
+      carbs: getKeyTotal("carbs", tempList),
+      fiber: getKeyTotal("fiber", tempList),
+      sugar: getKeyTotal("sugar", tempList),
+      sodium: getKeyTotal("sodium", tempList),
+      chol: getKeyTotal("chol", tempList),
+      potas: getKeyTotal("potas", tempList)
+    });
+  };
+
+  useEffect(() => {
+    return ((isClicked === true) ? console.log(getIngredientTotal(list)) : null);
+  }, [isClicked]);
 
   return (
     <div className="window window--add">
@@ -54,7 +110,7 @@ const AddIngredient = (props) => {
       <form id="ingredienInfo">
         <div className="window__input-container">
           <h3 className="window__label--name" htmlFor="recipeName">
-            {props.newRecipe.name}
+            {newRecipe.name}
           </h3>
         </div>
 
@@ -239,7 +295,27 @@ const AddIngredient = (props) => {
         {/* Done Btn */}
         <LgBtn
           btnClass="btn btn--done"
-          click={ () => { changeState({ list: true }); } }
+          click={ () => {
+            updateList(newIngredient);
+
+            setNewIngredient({
+              name: "",
+              calories: "",
+              protein: "",
+              totFat: "",
+              satFat: "",
+              unsatFat: "",
+              carbs: "",
+              fiber: "",
+              sugar: "",
+              sodium: "",
+              chol: "",
+              potas: "",
+              quantity: ""
+            });
+
+            setClick(true);
+          } }
           text="Done"
         />
       </form>

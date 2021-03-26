@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import "./style/styles.css";
 import Header from "./components/Header.js";
-import RecipeList from "./components/windows/RecipeList.js";
+import RecipeList from "./components/uis/RecipeList.js";
 import Footer from "./components/Footer.js";
-import AddRecipe from "./components/windows/AddRecipe.js";
-import RecipeInfo from "./components/windows/RecipeInfo.js";
-import AddIngredient from "./components/windows/AddIngredient.js";
+import AddRecipe from "./components/uis/AddRecipe.js";
+import RecipeInfo from "./components/uis/RecipeInfo.js";
+import AddIngredient from "./components/uis/AddIngredient.js";
 
 export default function App() {
-  // Window Hook
-  const [window, handleWindow] = useState({
+  // UI Hook
+  const [ui, handleUI] = useState({
     list: true,     // Recipe list
     addRec: false,  // Add recipe
     addIngr: false, // Add ingredient
@@ -19,8 +19,8 @@ export default function App() {
     }
   });
 
-  const changeWindow = (val) => {
-    // Pass key:value pair to change window to render
+  const changeUI = (val) => {
+    // Pass key:value pair to change ui to render
     const reset = {
       // Temp object used to reset values
       list: false,
@@ -31,7 +31,7 @@ export default function App() {
         id: ""
       }
     };
-    handleWindow({
+    handleUI({
       // apply reset - overwrite passed value w/ true
       ...reset,
       ...val
@@ -57,15 +57,15 @@ export default function App() {
       <div className="main">
         <h3>Home recipe nutrition, without the guesswork.</h3>
 
-        {/* Window w/ true value will render */}
-        {window.info.show === true ? (
-          <RecipeInfo changeState={changeWindow} curId={window.info.id} />
-        ) : window.addRec === true ? (
-          <AddRecipe changeState={changeWindow} createRecipe={updateNewRecipe} />
-        ) : window.addIngr === true ? (
-          <AddIngredient changeState={changeWindow} createRecipe={updateNewRecipe} newRecipe={newRecipe} />
+        {/* UI w/ true value will render */}
+        {ui.info.show === true ? (
+          <RecipeInfo changeState={changeUI} curId={ui.info.id} />
+        ) : ui.addRec === true ? (
+          <AddRecipe changeState={changeUI} updateNewRecipe={updateNewRecipe} />
+        ) : ui.addIngr === true ? (
+          <AddIngredient changeState={changeUI} updateNewRecipe={updateNewRecipe} newRecipe={newRecipe} />
         ) : (
-          <RecipeList changeState={changeWindow} />
+          <RecipeList changeState={changeUI} />
         )}
       </div>
       <Footer />
@@ -74,17 +74,4 @@ export default function App() {
 }
 
 ///// CURRENT TASKS /////
-// DONE --- Refactor current code
-// DONE --- Create new object in test.json when next btn clicked in AddRecipe.js
-// DONE --- Set up app locally - connect to Nodejs, express, & MongoDB
-// DONE --- Populate recipe list based on MongoDB entries
-// DONE --- Fix data fetching so that React doesn't produce errors
-// DONE --- Create state object for new recipe 
-// DONE --- Create function to be passed to add recipe window to update new recipe state
-// Create state object for new ingredient
-// Create function to add new ingredient to new recipe state
-// Create function to get total value of a specific property
-// Create function that takes property total and updates new recipe state
-// Create function for POST operations to add new recipe object to DB
-// Reset newRecipe object after 
 // Refactor code

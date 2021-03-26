@@ -3,13 +3,15 @@ import SmBtn from "../btn-input/SmBtn.js";
 import LgBtn from "../btn-input/LgBtn.js";
 
 const AddRecipe = (props) => {
-  const { changeState, createRecipe } = props;
+  // changeState for UI state, updateNewRecipe for newRecipe obj state
+  const { changeState, updateNewRecipe } = props;
 
+  // hook for controlling storing updating input
   const [newValue, setNewValue] = useState({
     name: "",
     servings: ""
   });
-
+  // function to update inputs
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -20,7 +22,7 @@ const AddRecipe = (props) => {
       };
     });
   };
-
+  
   return (
     <div className="window window--add">
       {/* Close btn */}
@@ -63,7 +65,7 @@ const AddRecipe = (props) => {
         <LgBtn
           btnClass="btn btn--next"
           click={() => {
-            createRecipe(newValue);
+            updateNewRecipe(newValue);
             changeState({ addIngr: true });
           }}
           text="Next"

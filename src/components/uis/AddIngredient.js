@@ -6,9 +6,7 @@ import { getIngredientTotal, getRecipeTotal } from "../../large_func/obj_calc.js
 
 const AddIngredient = (props) => {
   const { changeState, updateNewRecipe, newRecipe } = props;
-
-  // New ingredient Hook
-  const [newIngredient, setNewIngredient] = useState({
+  const template = { // Ingredient obj template
     name: "",
     calories: "",
     protein: "",
@@ -22,15 +20,15 @@ const AddIngredient = (props) => {
     chol: "",
     potas: "",
     quantity: ""
-  });
-  // Ingredient list hook
-  const [list, setList] = useState([]);
-  // Done btn click hook
-  const [isClicked, setClick] = useState(false);
-  const [isUpdated, setUpdate] = useState(false);
-
-  // Update newIngredient state
+  };
+  
+  const [newIngredient, setNewIngredient] = useState(template); // New ingredient Hook
+  const [list, setList] = useState([]); // Ingredient array hook
+  const [isClicked, setClick] = useState(false); // Done btn click hook
+  const [isUpdated, setUpdate] = useState(false); // Upated hook
+  
   const handleChange = (event) => {
+    // Update newIngredient
     const { name, value } = event.target;
 
     setNewIngredient((prev) => {
@@ -40,9 +38,9 @@ const AddIngredient = (props) => {
       };
     });
   };
-
-  // Update list state
+  
   const updateList = (obj) => {
+    // Update ingredient array
     const newObj = obj;
 
     setList((prev) => {
@@ -51,27 +49,23 @@ const AddIngredient = (props) => {
   };
 
   useEffect(() => {
-    // Final merge of recipe obj before post
+    // Prepare data for post
     const mergeRecipe = () => {
-    const ingredientTotal = getIngredientTotal(list);
-    const recipeTotal = getRecipeTotal(ingredientTotal, newRecipe.servings);
-
-    updateNewRecipe(recipeTotal);
-    setClick(false);
-    setUpdate(true);
-  };
-
-    return ((isClicked === true) 
-      ? mergeRecipe()
-      : null);
-  }, [isClicked, newRecipe, updateNewRecipe, list]);
+      const ingredientTotal = getIngredientTotal(list);
+      const recipeTotal = getRecipeTotal(ingredientTotal, newRecipe.servings);
   
-  // State is updated after newRecipe. If true send POST request to add recipe to DB.
-  if (isUpdated) {
-    insertRecipe(newRecipe).then(result => console.log(result.data.message));
-    setUpdate(false);
-    changeState({ list: true });
-  }
+      updateNewRecipe(recipeTotal);
+      setClick(false);
+      setUpdate(true);
+    };
+
+    return( (isClicked) ? mergeRecipe(): null );
+  },[isClicked, newRecipe, list, updateNewRecipe]);
+
+  useEffect(() => {
+    // Post once isUpdated is true
+    return((isUpdated) ? (insertRecipe(newRecipe), setUpdate(false), changeState({ list: true })): null );
+  }, [ isUpdated, newRecipe, changeState ]);
   
   return (
     <div className="window window--add">
@@ -246,22 +240,7 @@ const AddIngredient = (props) => {
           btnClass="btn btn--next"
           click={ () => { 
             updateList(newIngredient);
-
-            setNewIngredient({
-              name: "",
-              calories: "",
-              protein: "",
-              totFat: "",
-              satFat: "",
-              unsatFat: "",
-              carbs: "",
-              fiber: "",
-              sugar: "",
-              sodium: "",
-              chol: "",
-              potas: "",
-              quantity: ""
-            });
+            setNewIngredient(template);
           }}
           text="Next"
         />
@@ -272,23 +251,7 @@ const AddIngredient = (props) => {
           btnClass="btn btn--done"
           click={ () => {
             updateList(newIngredient);
-
-            setNewIngredient({
-              name: "",
-              calories: "",
-              protein: "",
-              totFat: "",
-              satFat: "",
-              unsatFat: "",
-              carbs: "",
-              fiber: "",
-              sugar: "",
-              sodium: "",
-              chol: "",
-              potas: "",
-              quantity: ""
-            });
-
+            setNewIngredient(template);
             setClick(true);
           } }
           text="Done"

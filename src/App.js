@@ -73,5 +73,14 @@ export default function App() {
   );
 }
 
-///// CURRENT TASKS /////
-// Refactor code
+///// TO DO /////
+// Refactor AddIngredient Components to shorten length
+// Add error handling to AddIngredient and AddRecipe
+// Add an Edit component using updateRecipe api call
+// Add error handling
+// Refactor
+// Change RecipeInfo window to display recipe ingredients
+// Change AddIngredient window to show recipes added already
+
+// Changed updateList - took out unnecessary name/ value assignment
+// Moved form in addIngredient to it's own component named IngredientForm.js

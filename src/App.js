@@ -62,6 +62,8 @@ export default function App() {
         {/* UI w/ true value will render */}
         {ui.info.show === true ? (
           <RecipeInfo changeState={changeUI} curId={ui.info.id} />
+        ) : ui.edit === true ? (
+          <Edit changeState={changeUI} curId={ui.info.id} />
         ) : ui.addRec === true ? ( 
           <AddRecipe changeState={changeUI} updateNewRecipe={updateNewRecipe} />
         ) : ui.addIngr === true ? (
@@ -85,8 +87,7 @@ export default function App() {
 // Change API connection to MongoAtlas account
 
 ///// CURRENT TASK /////
-// DONE --- Add array of ingredients to recipe Schema
-// DONE --- Make newRecipe contain an array of ingredients objs
-// DONE --- Create Edit.js
-// DONE --- Create base div container and h3 within a form
-// DONE --- Add Edit btn to RecipeInfo.js
+// DONE --- Allow Edit.js to be rendered under specified condition
+// Add proper components and HTML to fill out Edit.js
+// DONE --- Make Edit.js pull data from the currently read recipe
+// Populate Edit.js form fields with first ingredient data

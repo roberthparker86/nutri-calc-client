@@ -6,6 +6,7 @@ import Footer from "./components/Footer.js";
 import AddRecipe from "./components/uis/AddRecipe.js";
 import RecipeInfo from "./components/uis/RecipeInfo.js";
 import AddIngredient from "./components/uis/AddIngredient.js";
+import Edit from "./components/uis/Edit.js";
 
 export default function App() {
   // UI Hook
@@ -26,6 +27,7 @@ export default function App() {
       list: false,
       addRec: false,
       addIngr: false,
+      edit: false,
       info: {
         show: false,
         id: ""
@@ -60,7 +62,7 @@ export default function App() {
         {/* UI w/ true value will render */}
         {ui.info.show === true ? (
           <RecipeInfo changeState={changeUI} curId={ui.info.id} />
-        ) : ui.addRec === true ? (
+        ) : ui.addRec === true ? ( 
           <AddRecipe changeState={changeUI} updateNewRecipe={updateNewRecipe} />
         ) : ui.addIngr === true ? (
           <AddIngredient changeState={changeUI} updateNewRecipe={updateNewRecipe} newRecipe={newRecipe} />
@@ -74,13 +76,17 @@ export default function App() {
 }
 
 ///// TO DO /////
-// Refactor AddIngredient Components to shorten length
 // Add error handling to AddIngredient and AddRecipe
 // Add an Edit component using updateRecipe api call
 // Add error handling
 // Refactor
 // Change RecipeInfo window to display recipe ingredients
 // Change AddIngredient window to show recipes added already
+// Change API connection to MongoAtlas account
 
-// Changed updateList - took out unnecessary name/ value assignment
-// Moved form in addIngredient to it's own component named IngredientForm.js
+///// CURRENT TASK /////
+// DONE --- Add array of ingredients to recipe Schema
+// DONE --- Make newRecipe contain an array of ingredients objs
+// DONE --- Create Edit.js
+// DONE --- Create base div container and h3 within a form
+// DONE --- Add Edit btn to RecipeInfo.js

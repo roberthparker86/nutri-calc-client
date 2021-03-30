@@ -53,7 +53,19 @@ const RecipeInfo = (props) => {
       </div>
 
       {/* Edit Btn */}
-      <LgBtn btnClass="btn btn--edit" click={changeState} text="Edit" />
+      <LgBtn 
+        btnClass="btn btn--edit" 
+        click={() => {
+          changeState({
+            edit: true,
+            info: {
+              show: false,
+              id: props.curId
+            }
+          });
+        }} 
+        text="Edit"
+      />
     </div>
   );
 };

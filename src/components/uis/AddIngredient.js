@@ -54,7 +54,10 @@ const AddIngredient = (props) => {
       const ingredientTotal = getIngredientTotal(list);
       const recipeTotal = getRecipeTotal(ingredientTotal, newRecipe.servings);
   
-      updateNewRecipe(recipeTotal);
+      updateNewRecipe({
+        ...recipeTotal,
+        ingredients: list
+      });
       setClick(false);
       setUpdate(true);
     };

@@ -85,9 +85,10 @@ export default function App() {
 // Change RecipeInfo window to display recipe ingredients
 // Change AddIngredient window to show recipes added already
 // Change API connection to MongoAtlas account
+// Refactor Form/Input components?
 
 ///// CURRENT TASK /////
 // DONE --- Allow Edit.js to be rendered under specified condition
-// Add proper components and HTML to fill out Edit.js
+// DONE --- Add proper components and HTML to fill out Edit.js
 // DONE --- Make Edit.js pull data from the currently read recipe
-// Populate Edit.js form fields with first ingredient data
+// DONE --- Populate Edit.js form fields with first ingredient data

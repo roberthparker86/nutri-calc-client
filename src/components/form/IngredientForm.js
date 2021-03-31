@@ -3,13 +3,13 @@ import Input from "../btn-input/Input.js";
 import LgBtn from "../btn-input/LgBtn.js";
 
 const IngredientForm = (props) => {
-    const { newRecipe, newIngredient, handleChange, updateList, setNewIngredient, setClick, template } = props;
+    const { recipe, ingredient, handleChange, nextBtnFunc, doneBtnFunc } = props;
 
     return(
         <form id="ingredienInfo">
         <div className="window__input-container">
           <h3 className="window__label--name" htmlFor="recipeName">
-            {newRecipe.name}
+            {recipe.name}
           </h3>
         </div>
 
@@ -21,7 +21,7 @@ const IngredientForm = (props) => {
               className="window__input window__input--recipe-name"
               id="ingredientName"
               name="name"
-              value={newIngredient.name}
+              value={ingredient.name}
               onChange={handleChange}
               placeholder="What's the ingredient name?"
             ></input>
@@ -33,7 +33,7 @@ const IngredientForm = (props) => {
             <Input
               id="calInput"
               name="calories"
-              value={newIngredient.calories}
+              value={ingredient.calories}
               update={handleChange}
               label="Calories:"
               spanID="calInputInline"
@@ -44,7 +44,7 @@ const IngredientForm = (props) => {
             <Input
               id="proteinInput"
               name="protein"
-              value={newIngredient.protein}
+              value={ingredient.protein}
               update={handleChange}
               label="Protein:"
               spanID="proteinInputInline"
@@ -55,7 +55,7 @@ const IngredientForm = (props) => {
             <Input
               id="totalFatInput"
               name="totFat"
-              value={newIngredient.totFat}
+              value={ingredient.totFat}
               update={handleChange}
               label="Total Fat:"
               spanID="totalFatInputInline"
@@ -66,7 +66,7 @@ const IngredientForm = (props) => {
             <Input
               id="satFatInput"
               name="satFat"
-              value={newIngredient.satFat}
+              value={ingredient.satFat}
               update={handleChange}
               label="Saturated Fat:"
               spanID="satFatInputInline"
@@ -77,7 +77,7 @@ const IngredientForm = (props) => {
             <Input
               id="unatFatInput"
               name="unsatFat"
-              value={newIngredient.unsatFat}
+              value={ingredient.unsatFat}
               update={handleChange}
               label="Unsaturated Fat:"
               spanID="unatFatInput"
@@ -88,7 +88,7 @@ const IngredientForm = (props) => {
             <Input
               id="carbInput"
               name="carbs"
-              value={newIngredient.carbs}
+              value={ingredient.carbs}
               update={handleChange}
               label="Carbohydrates:"
               spanID="carbInputInline"
@@ -104,7 +104,7 @@ const IngredientForm = (props) => {
             <Input
               id="fiberInput"
               name="fiber"
-              value={newIngredient.fiber}
+              value={ingredient.fiber}
               update={handleChange}
               label="Fiber:"
               spanID="fiberInputInline"
@@ -115,7 +115,7 @@ const IngredientForm = (props) => {
             <Input
               id="sugarInput"
               name="sugar"
-              value={newIngredient.sugar}
+              value={ingredient.sugar}
               update={handleChange}
               label="Sugar:"
               spanID="sugarInputInline"
@@ -126,7 +126,7 @@ const IngredientForm = (props) => {
             <Input
               id="sodiumInput"
               name="sodium"
-              value={newIngredient.sodium}
+              value={ingredient.sodium}
               update={handleChange}
               label="Sodium:"
               spanID="sodiumInputInline"
@@ -137,7 +137,7 @@ const IngredientForm = (props) => {
             <Input
               id="cholesterolInput"
               name="chol"
-              value={newIngredient.chol}
+              value={ingredient.chol}
               update={handleChange}
               label="Cholesterol:"
               spanID="cholesterolInputInline"
@@ -148,7 +148,7 @@ const IngredientForm = (props) => {
             <Input
               id="potassiumInput"
               name="potas"
-              value={newIngredient.potas}
+              value={ingredient.potas}
               update={handleChange}
               label="Potassium:"
               spanID="potassiumInputInline"
@@ -159,7 +159,7 @@ const IngredientForm = (props) => {
             <Input
               id="quantityInput"
               name="quantity"
-              value={newIngredient.quantity}
+              value={ingredient.quantity}
               update={handleChange}
               label="Quantity:"
               spanID="quantityInputInline"
@@ -171,10 +171,7 @@ const IngredientForm = (props) => {
         <LgBtn
           type="button"
           btnClass="btn btn--next"
-          click={ () => { 
-            updateList(newIngredient);
-            setNewIngredient(template);
-          }}
+          click={nextBtnFunc}
           text="Next"
         />
 
@@ -182,11 +179,7 @@ const IngredientForm = (props) => {
         {/* Done Btn */}
         <LgBtn
           btnClass="btn btn--done"
-          click={ () => {
-            updateList(newIngredient);
-            setNewIngredient(template);
-            setClick(true);
-          } }
+          click={doneBtnFunc}
           text="Done"
         />
       </form>

@@ -81,13 +81,18 @@ const AddIngredient = (props) => {
         x
       </div>
       <IngredientForm 
-        newRecipe={newRecipe}
-        newIngredient={newIngredient}
+        recipe={newRecipe}
+        ingredient={newIngredient}
         handleChange={handleChange}
-        updateList={updateList}
-        setNewIngredient={setNewIngredient}
-        setClick={setClick}
-        template={template}
+        nextBtnFunc={() => { 
+            updateList(newIngredient);
+            setNewIngredient(template);
+          }}
+        doneBtnFunc={() => {
+            updateList(newIngredient);
+            setNewIngredient(template);
+            setClick(true);
+          }}
       />
     </div>
   );

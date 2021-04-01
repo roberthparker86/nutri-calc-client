@@ -87,7 +87,10 @@ export default function App() {
 // Change API connection to MongoAtlas account
 
 ///// CURRENT TASK /////
-// DONE --- Destructure Input props for readability
-// DONE --- Refactor IngredientForm component so it can be utilized by both Edit.js and AddIngredient.js
-// DONE --- Create new hook array to hold updated ingredient data
-// DONE --- Add functionality so that every time next button is clicked, the current ingredient obj is pushed to new array
+// DONE --- Add functionality to Next btn: curIngr becomes the next ingredient in the list. Fields are populated with new data
+// DONE --- Create function with setCount within it that also checks that count doesn't go beyond ingredient array length
+// Add functionality to Done btn: 
+//  1) recipe totals are calculated again 
+//  2) total recipe hook is updated 
+//  3) new ingredient list is updated in recipe hook 
+//  4) updateRecipe operation is carried out 

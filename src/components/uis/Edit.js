@@ -21,10 +21,11 @@ export default function Edit (props) {
         quantity: ""
       };
     
-    const [ recipe, handleRecipe ] = useState({});
-    const [ isLoaded, setLoaded ] = useState(false);
-    const [ newIngrList, setNewIngrList ] = useState([]);
-    const [ curIngr, setCurIngr ] = useState(template);
+    const [ recipe, handleRecipe ] = useState({}); // Recipe to edit
+    const [ isLoaded, setLoaded ] = useState(false); // Used to determine whether Read operations have resolved
+    const [ newIngrList, setNewIngrList ] = useState([]); // Array for updated ingredient data
+    const [ curIngr, setCurIngr ] = useState(template); // Current ingredient displayed/ edited
+    const [count, setCount ] = useState(0); // Counter used for indexing
 
     const handleChange = (event) => {
         // Update newIngredient
@@ -52,9 +53,22 @@ export default function Edit (props) {
 
     useEffect(() => {
         return isLoaded ? 
-            setCurIngr(recipe.ingredients[0]) 
+            (setCurIngr(recipe.ingredients[count]),
+            setLoaded(false))
             : null;
     }, [isLoaded]);
+
+    const checkMaxCount = () => {
+        const maxCount = (recipe.ingredients.length - 1);
+        return count === maxCount;
+    };
+
+    const nextClick = () => {
+        return( checkMaxCount() === false
+            ? (updateList(curIngr), setCount(count + 1), setLoaded(true))
+            : (newIngrList.length !== recipe.ingredients.length) && (updateList(curIngr), setLoaded(true))
+        );
+    };
 
     const updateList = (obj) => {
         setNewIngrList(prev => [...prev, obj]);
@@ -74,7 +88,8 @@ export default function Edit (props) {
                 ingredient={curIngr}
                 handleChange={handleChange}
                 nextBtnFunc={() => {
-                    updateList(curIngr);
+                    nextClick();
+                    console.log(newIngrList);
                 }}
                 doneBtnFunc={() => console.log("Clicked")}
             />

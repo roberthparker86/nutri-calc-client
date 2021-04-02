@@ -87,10 +87,6 @@ export default function App() {
 // Change API connection to MongoAtlas account
 
 ///// CURRENT TASK /////
-// DONE --- Add functionality to Next btn: curIngr becomes the next ingredient in the list. Fields are populated with new data
-// DONE --- Create function with setCount within it that also checks that count doesn't go beyond ingredient array length
-// Add functionality to Done btn: 
-//  1) recipe totals are calculated again 
-//  2) total recipe hook is updated 
-//  3) new ingredient list is updated in recipe hook 
-//  4) updateRecipe operation is carried out 
+// DONE --- Updated updateCtrl.js to reflect recipeSchema from recipeModel.js
+// DONE --- Add functionality to Done btn: (NOTE: Must fix having to click Done Btn more than once)
+// Make Done Btn only render if newIngrList.length === recipe.ingredients.length

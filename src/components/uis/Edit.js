@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getRecipeById } from "../../api";
-import Input from "../btn-input/Input";
 import IngredientForm from "../form/IngredientForm";
+import objCalc from "../../large_func/obj_calc.js";
+import { updateRecipeById } from "../../api/index.js";
 
 export default function Edit (props) {
     const { changeState } = props;
+    const { getIngredientTotal, getRecipeTotal } = objCalc;
     const template = { // Ingredient obj template
         name: "",
         calories: "",
@@ -25,7 +27,9 @@ export default function Edit (props) {
     const [ isLoaded, setLoaded ] = useState(false); // Used to determine whether Read operations have resolved
     const [ newIngrList, setNewIngrList ] = useState([]); // Array for updated ingredient data
     const [ curIngr, setCurIngr ] = useState(template); // Current ingredient displayed/ edited
-    const [count, setCount ] = useState(0); // Counter used for indexing
+    const [ count, setCount ] = useState(0); // Counter used for indexing
+    const [ isClicked, setClick ] = useState(false); // Done Btn hook
+    const [ isReady, setReady ] = useState(false); // Recipe ready for put request hook
 
     const handleChange = (event) => {
         // Update newIngredient
@@ -38,25 +42,6 @@ export default function Edit (props) {
           };
         });
     };
-
-    useEffect(() => {
-        const fetchRecipe = async () => {
-            await getRecipeById(props.curId)
-                .then(res => {
-                    handleRecipe(res.data.data);
-                    setLoaded(true);
-                });
-        };
-
-        fetchRecipe();
-    }, []);
-
-    useEffect(() => {
-        return isLoaded ? 
-            (setCurIngr(recipe.ingredients[count]),
-            setLoaded(false))
-            : null;
-    }, [isLoaded]);
 
     const checkMaxCount = () => {
         const maxCount = (recipe.ingredients.length - 1);
@@ -73,6 +58,62 @@ export default function Edit (props) {
     const updateList = (obj) => {
         setNewIngrList(prev => [...prev, obj]);
     };
+
+    useEffect(() => {
+        // Fetch recipe data. Executes once when Edit.js is rendered.
+        const fetchRecipe = async () => {
+            await getRecipeById(props.curId)
+                .then(res => {
+                    handleRecipe(res.data.data);
+                    setLoaded(true);
+                });
+        };
+
+        fetchRecipe();
+    }, []);
+
+    useEffect(() => {
+        // Selects an ingredient to populate form inputs and edit.
+        return isLoaded ? 
+            (setCurIngr(recipe.ingredients[count]),
+            setLoaded(false))
+            : null;
+    }, [isLoaded]);
+
+    useEffect(() => {
+        // Prepares updated data for PUT request
+        const mergeIngredients = () => {
+            const ingredientTotal = getIngredientTotal(newIngrList);
+            const recipeTotal = getRecipeTotal(ingredientTotal, recipe.servings); 
+
+            handleRecipe((prev) => {
+                return({
+                    ...prev,
+                    ...recipeTotal,
+                    ingredients: newIngrList
+                });
+            });
+        };
+
+        return( 
+            (isClicked)
+            ? (mergeIngredients(), setClick(false), setReady(true))
+            : null
+        );
+    }, [isClicked, setLoaded, updateList]);
+
+    useEffect(() => { 
+        return(
+            (isReady)
+            ? updateRecipeById(recipe._id, recipe)
+                .then( res => {
+                    console.log(res);
+                    setReady(false);
+                    changeState({ list: true });
+                })
+            : null
+        );
+    }, [isReady]);
 
     return (
         <div className="window window--add">
@@ -91,7 +132,13 @@ export default function Edit (props) {
                     nextClick();
                     console.log(newIngrList);
                 }}
-                doneBtnFunc={() => console.log("Clicked")}
+                doneBtnFunc={() => {
+                    return(
+                        (newIngrList.length !== recipe.ingredients.length)
+                        ? (updateList(curIngr), setLoaded(true))
+                        : setClick(true)
+                    );
+                } }
             />
             
         </div>

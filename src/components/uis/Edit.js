@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getRecipeById } from "../../api";
-import IngredientForm from "../form/IngredientForm";
+import EditForm from "../form/EditForm.js";
 import objCalc from "../../large_func/obj_calc.js";
 import { updateRecipeById } from "../../api/index.js";
 
@@ -124,7 +124,7 @@ export default function Edit (props) {
             > 
                 x
             </div>
-            <IngredientForm 
+            <EditForm 
                 recipe={recipe}
                 ingredient={curIngr}
                 handleChange={handleChange}
@@ -133,12 +133,9 @@ export default function Edit (props) {
                     console.log(newIngrList);
                 }}
                 doneBtnFunc={() => {
-                    return(
-                        (newIngrList.length !== recipe.ingredients.length)
-                        ? (updateList(curIngr), setLoaded(true))
-                        : setClick(true)
-                    );
-                } }
+                    setClick(true);
+                }}
+                newIngrList={ newIngrList }
             />
             
         </div>

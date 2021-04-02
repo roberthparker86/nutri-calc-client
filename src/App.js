@@ -87,6 +87,7 @@ export default function App() {
 // Change API connection to MongoAtlas account
 
 ///// CURRENT TASK /////
-// DONE --- Updated updateCtrl.js to reflect recipeSchema from recipeModel.js
-// DONE --- Add functionality to Done btn: (NOTE: Must fix having to click Done Btn more than once)
-// Make Done Btn only render if newIngrList.length === recipe.ingredients.length
+// DONE --- Make Done Btn only render if newIngrList.length === recipe.ingredients.length
+// DONE --- Done btn only triggers calculating the new recipe values and making put request to server
+// NOTE: When Next btn is hit the last time, the fields reset to the previous values of that ingredient.
+// Values pushed to newIngrList are the correct values just given by user however.

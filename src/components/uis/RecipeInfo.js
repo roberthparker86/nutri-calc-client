@@ -2,24 +2,38 @@ import React, { useState, useEffect } from "react";
 import InfoField from "../btn-input/InfoField.js";
 import SmBtn from "../btn-input/SmBtn.js";
 import LgBtn from "../btn-input/LgBtn.js";
-import { getRecipeById } from '../../api/index.js';
+import { deleteRecipeById, getRecipeById } from '../../api/index.js';
 
 const RecipeInfo = (props) => {
-  const { changeState } = props;
+  const { changeState, curId } = props;
 
   // Active Recipe State
   const [recipe, handleRecipe] = useState({});
   const { name, calories, protein, totFat, satFat, unsatFat, carbs, fiber, sugar, sodium, chol, potas } = recipe;
+  const [ deleteClick, setDeleteClick ] = useState(false);
+
+  useEffect(() => {
+    return(
+      (deleteClick)
+        ? deleteRecipeById(curId)
+          .then( res => { 
+            console.log(res); 
+            changeState({ list: true })
+          })
+          .catch(err => console.log(err))
+        : null
+    );
+  }, [deleteClick, changeState, curId]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
-      const result = await getRecipeById(props.curId);
+      const result = await getRecipeById(curId);
 
       handleRecipe(result.data.data);
     };
 
     fetchRecipe();
-  }, [props.curId]);
+  }, [curId]);
 
   return (
     <div className="window">
@@ -54,7 +68,7 @@ const RecipeInfo = (props) => {
 
       {/* Edit Btn */}
       <LgBtn 
-        btnClass="btn btn--edit" 
+        btnClass="btn btn--left" 
         click={() => {
           changeState({
             edit: true,
@@ -65,6 +79,15 @@ const RecipeInfo = (props) => {
           });
         }} 
         text="Edit"
+      />
+
+      {/* Delete Btn */}
+      <LgBtn 
+        btnClass="btn btn--right" 
+        click={() => {
+          setDeleteClick(true);
+        }} 
+        text="Delete"
       />
     </div>
   );

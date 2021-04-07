@@ -170,7 +170,7 @@ const EditForm = (props) => {
         {/* Next btn */}
         <LgBtn
           type="button"
-          btnClass="btn btn--next"
+          btnClass="btn btn--left"
           click={nextBtnFunc}
           text="Next"
         />
@@ -180,7 +180,7 @@ const EditForm = (props) => {
         { (recipe.ingredients !== undefined)
             ? (recipe.ingredients.length === newIngrList.length)
                 ? (<LgBtn
-                btnClass="btn btn--done"
+                btnClass="btn btn--right"
                 click={doneBtnFunc}
                 text="Done"
                 />)

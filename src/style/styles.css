@@ -210,27 +210,9 @@ footer,
   box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.25);
 }
 
-/* Edit Btn */
-.btn--edit {
-  background-color: var(--orange);
-  border: none;
-  color: var(--white);
-  font-size: 120%;
-  margin: 0;
-  padding: 0.75rem 1.5rem;
-  position: absolute;
-  transform: translate(-50%, 50%);
-  bottom: 0;
-  left: 50%;
-}
-
-.btn--edit:hover {
-  color: var(--white);
-}
-
 /* Done & Next Btn */
-.btn--next,
-.btn--done {
+.btn--left,
+.btn--right {
   background-color: var(--orange);
   bottom: 0;
   color: var(--white);
@@ -239,11 +221,11 @@ footer,
   transform: translate(0, 50%);
 }
 
-.btn--next {
+.btn--left {
   left: 20%;
 }
 
-.btn--done {
+.btn--right {
   right: 20%;
 }
 

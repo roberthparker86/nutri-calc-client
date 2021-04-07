@@ -84,9 +84,12 @@ export default function App() {
 // Refactor
 // Change RecipeInfo window to display recipe ingredients
 // Change AddIngredient window to show recipes added already
-// DONE --- Change API connection to MongoAtlas account
-// Create ENV file to pull db connection pass from and add to .gitignore
+// DONE --- Create ENV file to pull db connection pass from and add to .gitignore
 
 ///// CURRENT TASK /////
-// NOTE: When Next btn is hit the last time, the fields reset to the previous values of that ingredient.
-// Values pushed to newIngrList are the correct values just given by user however.
+// DONE --- Add delete btn to RecipeInfo.js
+// DONE --- Change CSS btn--next to btn--left and btn--done to btn--right
+// DONE --- Delete CSS btn--edit. Replace on edit btn with btn--left
+// DONE --- Add DELETE function to RecipeInfo.js
+// DONE --- NOTE: When Next btn is hit the last time, the fields reset to the previous values of that ingredient.
+// NOTE: After recipe creation and return to RecipeList.js, window doesn't refresh when database sends updated list.

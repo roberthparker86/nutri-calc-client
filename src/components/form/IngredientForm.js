@@ -170,7 +170,7 @@ const IngredientForm = (props) => {
         {/* Next btn */}
         <LgBtn
           type="button"
-          btnClass="btn btn--next"
+          btnClass="btn btn--left"
           click={nextBtnFunc}
           text="Next"
         />
@@ -178,7 +178,7 @@ const IngredientForm = (props) => {
         <hr className="window__hr--add-bot" />
         {/* Done Btn */}
         <LgBtn
-          btnClass="btn btn--done"
+          btnClass="btn btn--right"
           click={doneBtnFunc}
           text="Done"
         />

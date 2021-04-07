@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getRecipeById } from "../../api";
 import EditForm from "../form/EditForm.js";
 import objCalc from "../../large_func/obj_calc.js";
-import { updateRecipeById } from "../../api/index.js";
+import { updateRecipeById, getRecipeById } from "../../api/index.js";
 
 export default function Edit (props) {
-    const { changeState } = props;
+    const { changeState, curId } = props;
     const { getIngredientTotal, getRecipeTotal } = objCalc;
     const template = { // Ingredient obj template
         name: "",
@@ -26,7 +25,7 @@ export default function Edit (props) {
     const [ recipe, handleRecipe ] = useState({}); // Recipe to edit
     const [ isLoaded, setLoaded ] = useState(false); // Used to determine whether Read operations have resolved
     const [ newIngrList, setNewIngrList ] = useState([]); // Array for updated ingredient data
-    const [ curIngr, setCurIngr ] = useState(template); // Current ingredient displayed/ edited
+    const [ currentIngredient, setcurrentIngredient ] = useState(template); // Current ingredient displayed/ edited
     const [ count, setCount ] = useState(0); // Counter used for indexing
     const [ isClicked, setClick ] = useState(false); // Done Btn hook
     const [ isReady, setReady ] = useState(false); // Recipe ready for put request hook
@@ -35,7 +34,7 @@ export default function Edit (props) {
         // Update newIngredient
         const { name, value } = event.target;
     
-        setCurIngr((prev) => {
+        setcurrentIngredient((prev) => {
           return {
             ...prev,
             [name]: value
@@ -50,11 +49,11 @@ export default function Edit (props) {
 
     const nextClick = () => {
         return( checkMaxCount() === false
-            ? (updateList(curIngr), setCount(count + 1), setLoaded(true))
-            : (newIngrList.length !== recipe.ingredients.length) && (updateList(curIngr), setLoaded(true))
+            ? (updateList(currentIngredient), setCount(count + 1), setLoaded(true))
+            : (newIngrList.length !== recipe.ingredients.length) && (updateList(currentIngredient), setLoaded(true))
         );
     };
-
+    
     const updateList = (obj) => {
         setNewIngrList(prev => [...prev, obj]);
     };
@@ -62,7 +61,7 @@ export default function Edit (props) {
     useEffect(() => {
         // Fetch recipe data. Executes once when Edit.js is rendered.
         const fetchRecipe = async () => {
-            await getRecipeById(props.curId)
+            await getRecipeById(curId)
                 .then(res => {
                     handleRecipe(res.data.data);
                     setLoaded(true);
@@ -70,15 +69,16 @@ export default function Edit (props) {
         };
 
         fetchRecipe();
-    }, []);
+    }, [curId]);
 
     useEffect(() => {
         // Selects an ingredient to populate form inputs and edit.
-        return isLoaded ? 
-            (setCurIngr(recipe.ingredients[count]),
-            setLoaded(false))
-            : null;
-    }, [isLoaded]);
+        return( isLoaded 
+            ? (newIngrList.length === recipe.ingredients.length)
+                ? (setcurrentIngredient(newIngrList[count]), setLoaded(false))
+                : (setcurrentIngredient(recipe.ingredients[count]), setLoaded(false))
+            : null)
+    }, [isLoaded, count, newIngrList, recipe.ingredients]);
 
     useEffect(() => {
         // Prepares updated data for PUT request
@@ -100,7 +100,7 @@ export default function Edit (props) {
             ? (mergeIngredients(), setClick(false), setReady(true))
             : null
         );
-    }, [isClicked, setLoaded, updateList]);
+    }, [isClicked, setLoaded, newIngrList, recipe.servings, getIngredientTotal, getRecipeTotal]);
 
     useEffect(() => { 
         return(
@@ -113,7 +113,7 @@ export default function Edit (props) {
                 })
             : null
         );
-    }, [isReady]);
+    }, [isReady, changeState, recipe]);
 
     return (
         <div className="window window--add">
@@ -126,11 +126,10 @@ export default function Edit (props) {
             </div>
             <EditForm 
                 recipe={recipe}
-                ingredient={curIngr}
+                ingredient={currentIngredient}
                 handleChange={handleChange}
                 nextBtnFunc={() => {
                     nextClick();
-                    console.log(newIngrList);
                 }}
                 doneBtnFunc={() => {
                     setClick(true);

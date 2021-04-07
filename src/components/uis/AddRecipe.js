@@ -63,7 +63,7 @@ const AddRecipe = (props) => {
 
         {/* Next Btn */}
         <LgBtn
-          btnClass="btn btn--next"
+          btnClass="btn btn--left"
           click={() => {
             updateNewRecipe(newValue);
             changeState({ addIngr: true });

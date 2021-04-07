@@ -7,14 +7,14 @@ const api = axios.create({
 export const insertRecipe = payload => api.post(`/recipe`, payload);
 export const getAllRecipes = () => api.get(`/recipes`);
 export const updateRecipeById = (id, payload) => api.put(`/recipe/${id}`, payload);
-export const deleteMovieById = id => api.delete(`/recipe/${id}`);
+export const deleteRecipeById = id => api.delete(`/recipe/${id}`);
 export const getRecipeById = id => api.get(`/recipe/${id}`);
 
 const apis = {
     insertRecipe,
     getAllRecipes,
     updateRecipeById,
-    deleteMovieById,
+    deleteRecipeById,
     getRecipeById
 };
 

@@ -61,9 +61,9 @@ export default function App() {
 
         {/* UI w/ true value will render */}
         {ui.info.show === true ? (
-          <RecipeInfo changeState={changeUI} curId={ui.info.id} />
+          <RecipeInfo changeState={changeUI} currentId={ui.info.id} />
         ) : ui.edit === true ? (
-          <Edit changeState={changeUI} curId={ui.info.id} />
+          <Edit changeState={changeUI} currentId={ui.info.id} />
         ) : ui.addRec === true ? ( 
           <AddRecipe changeState={changeUI} updateNewRecipe={updateNewRecipe} />
         ) : ui.addIngr === true ? (
@@ -79,17 +79,10 @@ export default function App() {
 
 ///// TO DO /////
 // Add error handling to AddIngredient and AddRecipe
-// Add an Edit component using updateRecipe api call
 // Add error handling
 // Refactor
 // Change RecipeInfo window to display recipe ingredients
 // Change AddIngredient window to show recipes added already
-// DONE --- Create ENV file to pull db connection pass from and add to .gitignore
 
 ///// CURRENT TASK /////
-// DONE --- Add delete btn to RecipeInfo.js
-// DONE --- Change CSS btn--next to btn--left and btn--done to btn--right
-// DONE --- Delete CSS btn--edit. Replace on edit btn with btn--left
-// DONE --- Add DELETE function to RecipeInfo.js
-// DONE --- NOTE: When Next btn is hit the last time, the fields reset to the previous values of that ingredient.
 // NOTE: After recipe creation and return to RecipeList.js, window doesn't refresh when database sends updated list.

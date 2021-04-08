@@ -5,7 +5,7 @@ import LgBtn from "../btn-input/LgBtn.js";
 import { deleteRecipeById, getRecipeById } from '../../api/index.js';
 
 const RecipeInfo = (props) => {
-  const { changeState, curId } = props;
+  const { changeState, currentId } = props;
 
   // Active Recipe State
   const [recipe, handleRecipe] = useState({});
@@ -15,7 +15,7 @@ const RecipeInfo = (props) => {
   useEffect(() => {
     return(
       (deleteClick)
-        ? deleteRecipeById(curId)
+        ? deleteRecipeById(currentId)
           .then( res => { 
             console.log(res); 
             changeState({ list: true })
@@ -23,17 +23,17 @@ const RecipeInfo = (props) => {
           .catch(err => console.log(err))
         : null
     );
-  }, [deleteClick, changeState, curId]);
+  }, [deleteClick, changeState, currentId]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
-      const result = await getRecipeById(curId);
+      const result = await getRecipeById(currentId);
 
       handleRecipe(result.data.data);
     };
 
     fetchRecipe();
-  }, [curId]);
+  }, [currentId]);
 
   return (
     <div className="window">
@@ -74,7 +74,7 @@ const RecipeInfo = (props) => {
             edit: true,
             info: {
               show: false,
-              id: props.curId
+              id: props.currentId
             }
           });
         }} 

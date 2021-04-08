@@ -2,24 +2,10 @@ import React, { useEffect, useState } from "react";
 import { insertRecipe } from "../../api/index.js";
 import { getIngredientTotal, getRecipeTotal } from "../../large_func/obj_calc.js";
 import IngredientForm from "../form/IngredientForm.js";
+import template from "../../obj/ingredientTemp.js";
 
 const AddIngredient = (props) => {
   const { changeState, updateNewRecipe, newRecipe } = props;
-  const template = { // Ingredient obj template
-    name: "",
-    calories: "",
-    protein: "",
-    totFat: "",
-    satFat: "",
-    unsatFat: "",
-    carbs: "",
-    fiber: "",
-    sugar: "",
-    sodium: "",
-    chol: "",
-    potas: "",
-    quantity: ""
-  };
   
   ///// Hooks /////
   const [newIngredient, setNewIngredient] = useState(template); // New ingredient Hook
@@ -27,7 +13,6 @@ const AddIngredient = (props) => {
   const [isClicked, setClick] = useState(false); // Done btn click hook
   const [isUpdated, setUpdate] = useState(false); // Upated hook
   
-  ///// Hook handlers /////
   const handleChange = (event) => {
     // Update newIngredient
     const { name, value } = event.target;
@@ -66,8 +51,21 @@ const AddIngredient = (props) => {
   },[isClicked, newRecipe, list, updateNewRecipe]);
 
   useEffect(() => {
-    // Post once isUpdated is true
-    return((isUpdated) ? (insertRecipe(newRecipe), setUpdate(false), changeState({ list: true })): null );
+    // Post once isUpdated === true
+    const postRecipe = async () => {
+      return(
+        (isUpdated)
+          ? (insertRecipe(newRecipe)
+              .then(result => {
+                console.log(result);
+                setUpdate(false);
+                changeState({ list: true });
+              }))
+          : null
+      );
+    };
+
+    postRecipe();
   }, [ isUpdated, newRecipe, changeState ]);
   
   ///// Component Return /////

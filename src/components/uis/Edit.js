@@ -2,25 +2,11 @@ import React, { useEffect, useState } from "react";
 import EditForm from "../form/EditForm.js";
 import objCalc from "../../large_func/obj_calc.js";
 import { updateRecipeById, getRecipeById } from "../../api/index.js";
+import template from "../../obj/ingredientTemp.js";
 
 export default function Edit (props) {
-    const { changeState, curId } = props;
+    const { changeState, currentId } = props;
     const { getIngredientTotal, getRecipeTotal } = objCalc;
-    const template = { // Ingredient obj template
-        name: "",
-        calories: "",
-        protein: "",
-        totFat: "",
-        satFat: "",
-        unsatFat: "",
-        carbs: "",
-        fiber: "",
-        sugar: "",
-        sodium: "",
-        chol: "",
-        potas: "",
-        quantity: ""
-      };
     
     const [ recipe, handleRecipe ] = useState({}); // Recipe to edit
     const [ isLoaded, setLoaded ] = useState(false); // Used to determine whether Read operations have resolved
@@ -61,7 +47,7 @@ export default function Edit (props) {
     useEffect(() => {
         // Fetch recipe data. Executes once when Edit.js is rendered.
         const fetchRecipe = async () => {
-            await getRecipeById(curId)
+            await getRecipeById(currentId)
                 .then(res => {
                     handleRecipe(res.data.data);
                     setLoaded(true);
@@ -69,7 +55,7 @@ export default function Edit (props) {
         };
 
         fetchRecipe();
-    }, [curId]);
+    }, [currentId]);
 
     useEffect(() => {
         // Selects an ingredient to populate form inputs and edit.

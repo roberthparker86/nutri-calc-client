@@ -8,10 +8,10 @@ export default function AddIngredient (props) {
   const { changeState, updateNewRecipe, newRecipe } = props;
   
   ///// Hooks /////
-  const [newIngredient, setNewIngredient] = useState(template); // New ingredient Hook
-  const [list, setList] = useState([]); // Ingredient array hook
-  const [isClicked, setClick] = useState(false); // Done btn click hook
-  const [isUpdated, setUpdate] = useState(false); // Upated hook
+  const [newIngredient, setNewIngredient] = useState(template); // New ingredient
+  const [list, setList] = useState([]); // Ingredient array
+  const [isClicked, setClick] = useState(false); // Done btn click
+  const [isUpdated, setUpdate] = useState(false); // Check if newRecipe updated
   
   const handleChange = (event) => {
     // Update newIngredient
@@ -71,13 +71,15 @@ export default function AddIngredient (props) {
   ///// Component Return /////
   return (
     <div className="window window--add">
-      <div // Clost btn
+      {/* // Clost btn */}
+      <div 
         className="sm-btn sm-btn--close"
         onClick={() => changeState({ list: true })}
         type="button"
       >
         x
       </div>
+      
       <IngredientForm 
         recipe={newRecipe}
         ingredient={newIngredient}

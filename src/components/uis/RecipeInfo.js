@@ -5,13 +5,15 @@ import LgBtn from "../btn-input/LgBtn.js";
 import { deleteRecipeById, getRecipeById } from '../../api/index.js';
 
 export default function RecipeInfo (props) {
+  ///// HOOKS /////
+  const [recipe, handleRecipe] = useState({}); // Recipe to be displayed
+  const [ deleteClick, setDeleteClick ] = useState(false); // Delete Btn
+
+  ///// DESTRUCTURING ASSIGNMENT /////
+  const { name, calories, protein, totFat, satFat, unsatFat, carbs, fiber, sugar, sodium, chol, potas } = recipe;
   const { changeState, currentId } = props;
 
-  // Active Recipe State
-  const [recipe, handleRecipe] = useState({});
-  const { name, calories, protein, totFat, satFat, unsatFat, carbs, fiber, sugar, sodium, chol, potas } = recipe;
-  const [ deleteClick, setDeleteClick ] = useState(false);
-
+  ///// USE EFFECT /////
   useEffect(() => {
     return(
       (deleteClick)
@@ -38,6 +40,7 @@ export default function RecipeInfo (props) {
   return (
     <div className="window">
       <h3>{name}</h3>
+
       {/* Close Btn */}
       <SmBtn
         class="sm-btn sm-btn--close"
@@ -47,6 +50,7 @@ export default function RecipeInfo (props) {
         text="x"
       />
       <hr />
+
       {/* Display recipe stats */}
       <div className="window__container window__container--recipe-info">
         <div className="window__col window__col--left">
@@ -57,6 +61,7 @@ export default function RecipeInfo (props) {
           <InfoField name="Unsaturated Fat:" value={unsatFat} unit="g" />
           <InfoField name="Cholesterol:" value={chol} unit="mg" />
         </div>
+        
         <div className="window__col">
           <InfoField name="Carbohydrates" value={carbs} unit="g" />
           <InfoField name="Fiber:" value={fiber} unit="g" />

@@ -71,19 +71,3 @@ export default function App() {
     </div>
   );
 }
-
-///// TO DO /////
-// Add error handling to AddIngredient and AddRecipe
-// Add error handling
-// Refactor
-// Change RecipeInfo window to display recipe ingredients
-// Change AddIngredient window to show recipes added already
-// Prepare for production and deployment on Heroku
-
-///// CURRENT TASK /////
-// Refactor components further if possible
-// Add error handling to AddIngredient.js
-// Add error handling to AddRecipe.js
-// Add error handling to Edit.js
-// Add error handling to RecipeInfo.js
-// Add error handling to RecipeList.js

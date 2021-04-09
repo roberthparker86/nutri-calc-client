@@ -4,10 +4,15 @@ import SmBtn from "../btn-input/SmBtn.js";
 import { getAllRecipes } from '../../api/index.js';
 
 export default function RecipeList(props) {
-  const { changeState } = props;
+  ///// HOOK /////
   const [list, handleList ] = useState([]);
 
+  ///// DESTRUCTURING ASSIGNMENT /////
+  const { changeState } = props;
+
+  ///// USE EFFECT /////
   useEffect(() => {
+    // Get list of recipes from DB.
     const fetchList = async () => {
       const result = await getAllRecipes();
 
@@ -21,11 +26,14 @@ export default function RecipeList(props) {
     <div className="window window--list">
       <h3>Recipes</h3>
       <hr />
+      {/* Close Btn */}
       <SmBtn
         class="sm-btn sm-btn--add"
         click={() => changeState({ addRec: true })}
         text="+"
       />
+
+      {/* Render list of recipes */}
       <div className="window__container">
       {list.map((recipe, index) => {
         return(

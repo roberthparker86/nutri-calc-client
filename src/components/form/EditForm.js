@@ -3,7 +3,7 @@ import Input from "../btn-input/Input.js";
 import LgBtn from "../btn-input/LgBtn.js";
 
 export default function EditForm (props) {
-    const { recipe, ingredient, handleChange, nextBtnFunc, doneBtnFunc, newIngrList } = props;
+    const { recipe, ingredient, handleChange, nextBtnFunc, doneBtnFunc, newIngredientList } = props;
 
     return(
         <form id="ingredienInfo">
@@ -178,7 +178,7 @@ export default function EditForm (props) {
         <hr className="window__hr--add-bot" />
         {/* Done Btn */}
         { (recipe.ingredients !== undefined)
-            ? (recipe.ingredients.length === newIngrList.length)
+            ? (recipe.ingredients.length === newIngredientList.length)
                 ? (<LgBtn
                 btnClass="btn btn--right"
                 click={doneBtnFunc}

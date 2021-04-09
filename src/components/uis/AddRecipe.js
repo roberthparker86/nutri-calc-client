@@ -11,8 +11,9 @@ export default function AddRecipe (props) {
     name: "",
     servings: ""
   });
-  // function to update inputs
+
   const handleChange = (event) => {
+    // function to update inputs
     const { name, value } = event.target;
 
     setNewValue((prev) => {

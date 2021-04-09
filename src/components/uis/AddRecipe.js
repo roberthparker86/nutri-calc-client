@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import SmBtn from "../btn-input/SmBtn.js";
 import LgBtn from "../btn-input/LgBtn.js";
 
-const AddRecipe = (props) => {
+export default function AddRecipe (props) {
   // changeState for UI state, updateNewRecipe for newRecipe obj state
   const { changeState, updateNewRecipe } = props;
 
@@ -74,5 +74,3 @@ const AddRecipe = (props) => {
     </div>
   );
 };
-
-export default AddRecipe;

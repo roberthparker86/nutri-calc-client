@@ -4,7 +4,7 @@ import objCalc from "../../large_func/obj_calc.js";
 import { updateRecipeById, getRecipeById } from "../../api/index.js";
 import template from "../../obj/ingredientTemp.js";
 
-export default function Edit (props) {
+export default function Edit(props) {
     const { changeState, currentId } = props;
     const { getIngredientTotal, getRecipeTotal } = objCalc;
     

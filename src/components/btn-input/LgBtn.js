@@ -1,6 +1,6 @@
 import React from "react";
 
-const LgBtn = (props) => {
+export default function LgBtn (props) {
   const { btnClass, click, text } = props;
   return (
     <button type="button" className={btnClass} onClick={click}>
@@ -8,5 +8,3 @@ const LgBtn = (props) => {
     </button>
   );
 };
-
-export default LgBtn;

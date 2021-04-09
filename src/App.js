@@ -9,38 +9,33 @@ import AddIngredient from "./components/uis/AddIngredient.js";
 import Edit from "./components/uis/Edit.js";
 
 export default function App() {
-  // UI Hook
-  const [ui, handleUI] = useState({
-    list: true,     // Recipe list
-    addRec: false,  // Add recipe
-    addIngr: false, // Add ingredient
-    info: {         // Recipe Info
+  ///// UI /////
+  const defaultUi = {
+    list: false,    // RecipeList.js
+    addRec: false,  // AddRecipe.js
+    addIngr: false, // AddIngredient.js
+    edit: false,    // Edit.js
+    info: {         // RecipeInfo.js
       show: false,
       id: ""
     }
+  }; 
+
+  const [ui, handleUI] = useState({
+    ...defaultUi,
+    list: true
   });
 
   const changeUI = (val) => {
     // Pass key:value pair to change ui to render
-    const reset = {
-      // Temp object used to reset values
-      list: false,
-      addRec: false,
-      addIngr: false,
-      edit: false,
-      info: {
-        show: false,
-        id: ""
-      }
-    };
     handleUI({
       // apply reset - overwrite passed value w/ true
-      ...reset,
+      ...defaultUi,
       ...val
     });
   };
 
-  // New recipe Hook
+  ///// NEW RECIPE /////
   const [newRecipe, handleNewRecipe] = useState({ });
 
   const updateNewRecipe = (obj) => {
@@ -83,6 +78,12 @@ export default function App() {
 // Refactor
 // Change RecipeInfo window to display recipe ingredients
 // Change AddIngredient window to show recipes added already
+// Prepare for production and deployment on Heroku
 
 ///// CURRENT TASK /////
-// NOTE: After recipe creation and return to RecipeList.js, window doesn't refresh when database sends updated list.
+// Refactor components further if possible
+// Add error handling to AddIngredient.js
+// Add error handling to AddRecipe.js
+// Add error handling to Edit.js
+// Add error handling to RecipeInfo.js
+// Add error handling to RecipeList.js

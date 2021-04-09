@@ -4,7 +4,7 @@ import { getIngredientTotal, getRecipeTotal } from "../../large_func/obj_calc.js
 import IngredientForm from "../form/IngredientForm.js";
 import template from "../../obj/ingredientTemp.js";
 
-const AddIngredient = (props) => {
+export default function AddIngredient (props) {
   const { changeState, updateNewRecipe, newRecipe } = props;
   
   ///// Hooks /////
@@ -95,5 +95,3 @@ const AddIngredient = (props) => {
     </div>
   );
 };
-
-export default AddIngredient;

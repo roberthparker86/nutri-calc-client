@@ -2,7 +2,7 @@ import React from "react";
 import Input from "../btn-input/Input.js";
 import LgBtn from "../btn-input/LgBtn.js";
 
-const IngredientForm = (props) => {
+export default function IngredientForm (props) {
     const { recipe, ingredient, handleChange, nextBtnFunc, doneBtnFunc } = props;
 
     return(
@@ -185,5 +185,3 @@ const IngredientForm = (props) => {
       </form>
     );
 };
-
-export default IngredientForm;

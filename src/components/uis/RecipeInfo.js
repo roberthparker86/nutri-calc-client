@@ -4,7 +4,7 @@ import SmBtn from "../btn-input/SmBtn.js";
 import LgBtn from "../btn-input/LgBtn.js";
 import { deleteRecipeById, getRecipeById } from '../../api/index.js';
 
-const RecipeInfo = (props) => {
+export default function RecipeInfo (props) {
   const { changeState, currentId } = props;
 
   // Active Recipe State
@@ -92,5 +92,3 @@ const RecipeInfo = (props) => {
     </div>
   );
 };
-
-export default RecipeInfo;

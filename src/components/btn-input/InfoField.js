@@ -1,13 +1,13 @@
 import React from "react";
 
-const InfoField = (props) => {
+export default function InfoField (props) {
+  const { name, value, unit } = props;
+  
   return (
     <div className="window__stat">
       <p>
-        {props.name} <span>{props.value}</span> {props.unit}
+        {name} <span>{value}</span> {unit}
       </p>
     </div>
   );
 };
-
-export default InfoField;

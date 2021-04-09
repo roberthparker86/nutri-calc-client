@@ -1,6 +1,6 @@
 import React from "react";
 
-const Input = (props) => {
+export default function Input (props) {
   const { id, name, value, update, label, spanID, unit } = props;
   
   return (
@@ -23,5 +23,3 @@ const Input = (props) => {
     </div>
   );
 };
-
-export default Input;

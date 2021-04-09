@@ -1,24 +1,23 @@
 import React from "react";
 
-const ListItem = (props) => {
+export default function ListItem (props) {
+  const { id, type, changeState, className, recipeName, calCount, value } = props;
 
   return (
     <button
-      type={props.type}
+      type={type}
       onClick={() => {
-        props.changeState({
+        changeState({
           info: {
             show: true,
-            id: props.id
+            id: id
           }
         });
       }}
-      className={props.className}
-      value={props.value}
+      className={className}
+      value={value}
     >
-      {props.recipeName} - <span>{props.calCount}</span>
+      {recipeName} - <span>{calCount}</span>
     </button>
   );
 };
-
-export default ListItem;

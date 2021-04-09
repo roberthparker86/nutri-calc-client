@@ -2,7 +2,7 @@ import React from "react";
 import Input from "../btn-input/Input.js";
 import LgBtn from "../btn-input/LgBtn.js";
 
-const EditForm = (props) => {
+export default function EditForm (props) {
     const { recipe, ingredient, handleChange, nextBtnFunc, doneBtnFunc, newIngrList } = props;
 
     return(
@@ -190,5 +190,3 @@ const EditForm = (props) => {
       </form>
     );
 };
-
-export default EditForm;

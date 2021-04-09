@@ -3,7 +3,7 @@ import ListItem from "../btn-input/ListItem.js";
 import SmBtn from "../btn-input/SmBtn.js";
 import { getAllRecipes } from '../../api/index.js';
 
-const RecipeList = (props) => {
+export default function RecipeList(props) {
   const { changeState } = props;
   const [list, handleList ] = useState([]);
 
@@ -46,5 +46,3 @@ const RecipeList = (props) => {
     </div>
   );
 };
-
-export default RecipeList;

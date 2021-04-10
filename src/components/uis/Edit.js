@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import EditForm from "../form/EditForm.js";
-import { getIngredientTotal, getRecipeTotal } from "../../large_func/obj_calc.js";
+import { getIngredientTotal, getRecipeTotal } from "../../large_func/objCalc.js";
 import { updateRecipeById, getRecipeById } from "../../api/index.js";
 import template from "../../obj/ingredientTemp.js";
 
@@ -89,7 +89,7 @@ export default function Edit(props) {
             ? (mergeIngredients(), setClick(false), setReady(true))
             : null
         );
-    }, [isClicked, setLoaded, newIngredientList, recipe.servings, getIngredientTotal, getRecipeTotal]);
+    }, [isClicked, setLoaded, newIngredientList, recipe.servings ]);
 
     useEffect(() => {
         // isReady === true, move forward with PUT ops using recipe obj 

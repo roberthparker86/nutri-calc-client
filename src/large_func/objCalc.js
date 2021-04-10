@@ -1,4 +1,4 @@
-// Multiply obj property values by quantity vlaue
+// Multiply obj nutrient values by quantity value
 const multObjValues = (obj) => {
     const { calories, protein, totFat, satFat, unsatFat, carbs, fiber, sugar, sodium, chol, potas, quantity } = obj;
     return({
@@ -61,10 +61,3 @@ const multObjValues = (obj) => {
       potas: Math.round((obj.potas / serv) * 10) / 10
     });
   };
-
-  const objCalc = {
-      getIngredientTotal,
-      getRecipeTotal
-  }
-
-  export default objCalc;

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./style/styles.css";
-import Header from "./components/Header.js";
+import Header from "./partials/Header.js";
 import RecipeList from "./components/uis/RecipeList.js";
-import Footer from "./components/Footer.js";
+import Footer from "./partials/Footer.js";
 import AddRecipe from "./components/uis/AddRecipe.js";
 import RecipeInfo from "./components/uis/RecipeInfo.js";
 import AddIngredient from "./components/uis/AddIngredient.js";

@@ -3,27 +3,10 @@ import { insertRecipe } from "../../api/index.js";
 import { getIngredientTotal, getRecipeTotal } from "../../large_func/objCalc.js";
 import IngredientForm from "../form/IngredientForm.js";
 import template from "../../obj/ingredientTemp.js";
-import { Snackbar } from "@material-ui/core";
-import { Alert, AlertTitle } from "@material-ui/lab";
-import { makeStyles } from "@material-ui/core/styles";
-
-// CSS Styling for Alert window
-const useStyles = makeStyles({
-  root: {
-    width: "100%"
-  },
-  message: {
-    fontSize: "16px"
-  },
-  title: {
-    fontSize: "20px",
-    fontWeight: "bold"
-  }
-});
+import ResponseAlert from "../ResponseAlert.js";
 
 export default function AddIngredient (props) {
   const { changeState, updateNewRecipe, newRecipe } = props;
-  const classes = useStyles();
   
   ///// Hooks /////
   const [newIngredient, setNewIngredient] = useState(template); // New ingredient
@@ -118,13 +101,8 @@ export default function AddIngredient (props) {
   ///// Component Return /////
   return (
     <div className="window window--add">
-      {/* Snackbar Alerts */}
-      <Snackbar className={classes.root} open={open} onClose={handleClose} >
-        <Alert className={classes.message} onClose={handleClose} severity={postAlert.severity} variant="filled" >
-          <AlertTitle className={classes.title}>{postAlert.title}</AlertTitle>
-          {postAlert.message}
-        </Alert>
-      </Snackbar>
+      {/* POST ops response message */}
+      <ResponseAlert open={open} handleClose={handleClose} alert={postAlert} />
       
       {/* // Clost btn */}
       <div 

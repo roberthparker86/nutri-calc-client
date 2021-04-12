@@ -70,26 +70,27 @@ export default function AddIngredient (props) {
   // Post once isUpdated === true
   useEffect(() => {
     const postRecipe = async () => {
+      const handleResponse = (obj) => {
+        setPostAlert(obj);
+        setOpen(true);
+        setUpdate(false);
+      };
       return(
         (isUpdated)
           ? (insertRecipe(newRecipe)
               .then(result => {
-                setPostAlert({
+                handleResponse({
                   severity: "success",
                   title: "Success!",
                   message: result.data.message
-                })
-                setOpen(true);
-                setUpdate(false);
+                });
               })
               .catch(err => {
-                setPostAlert({
+                handleResponse({
                   severity: "error",
                   title: "Error!",
                   message: `Failed to create recipe: ${err}`
                 });
-                setOpen(true);
-                setUpdate(false);
               }))
           : null
       );

@@ -9,7 +9,7 @@ export default function EditForm (props) {
         <form id="ingredienInfo">
         <div className="window__input-container">
           <h3 className="window__label--name" htmlFor="recipeName">
-            {recipe.name}
+            {recipe.name || ""}
           </h3>
         </div>
 
@@ -21,7 +21,7 @@ export default function EditForm (props) {
               className="window__input window__input--recipe-name"
               id="ingredientName"
               name="name"
-              value={ingredient.name}
+              value={ingredient.name || 0}
               onChange={handleChange}
               placeholder="What's the ingredient name?"
             ></input>
@@ -33,7 +33,7 @@ export default function EditForm (props) {
             <Input
               id="calInput"
               name="calories"
-              value={ingredient.calories}
+              value={ingredient.calories || 0}
               update={handleChange}
               label="Calories:"
               spanID="calInputInline"
@@ -44,7 +44,7 @@ export default function EditForm (props) {
             <Input
               id="proteinInput"
               name="protein"
-              value={ingredient.protein}
+              value={ingredient.protein || 0}
               update={handleChange}
               label="Protein:"
               spanID="proteinInputInline"
@@ -55,7 +55,7 @@ export default function EditForm (props) {
             <Input
               id="totalFatInput"
               name="totFat"
-              value={ingredient.totFat}
+              value={ingredient.totFat || 0}
               update={handleChange}
               label="Total Fat:"
               spanID="totalFatInputInline"
@@ -66,7 +66,7 @@ export default function EditForm (props) {
             <Input
               id="satFatInput"
               name="satFat"
-              value={ingredient.satFat}
+              value={ingredient.satFat || 0}
               update={handleChange}
               label="Saturated Fat:"
               spanID="satFatInputInline"
@@ -77,7 +77,7 @@ export default function EditForm (props) {
             <Input
               id="unatFatInput"
               name="unsatFat"
-              value={ingredient.unsatFat}
+              value={ingredient.unsatFat || 0}
               update={handleChange}
               label="Unsaturated Fat:"
               spanID="unatFatInput"
@@ -88,7 +88,7 @@ export default function EditForm (props) {
             <Input
               id="carbInput"
               name="carbs"
-              value={ingredient.carbs}
+              value={ingredient.carbs || 0}
               update={handleChange}
               label="Carbohydrates:"
               spanID="carbInputInline"
@@ -104,7 +104,7 @@ export default function EditForm (props) {
             <Input
               id="fiberInput"
               name="fiber"
-              value={ingredient.fiber}
+              value={ingredient.fiber || 0}
               update={handleChange}
               label="Fiber:"
               spanID="fiberInputInline"
@@ -115,7 +115,7 @@ export default function EditForm (props) {
             <Input
               id="sugarInput"
               name="sugar"
-              value={ingredient.sugar}
+              value={ingredient.sugar || 0}
               update={handleChange}
               label="Sugar:"
               spanID="sugarInputInline"
@@ -126,7 +126,7 @@ export default function EditForm (props) {
             <Input
               id="sodiumInput"
               name="sodium"
-              value={ingredient.sodium}
+              value={ingredient.sodium || 0}
               update={handleChange}
               label="Sodium:"
               spanID="sodiumInputInline"
@@ -137,7 +137,7 @@ export default function EditForm (props) {
             <Input
               id="cholesterolInput"
               name="chol"
-              value={ingredient.chol}
+              value={ingredient.chol || 0}
               update={handleChange}
               label="Cholesterol:"
               spanID="cholesterolInputInline"
@@ -148,7 +148,7 @@ export default function EditForm (props) {
             <Input
               id="potassiumInput"
               name="potas"
-              value={ingredient.potas}
+              value={ingredient.potas || 0}
               update={handleChange}
               label="Potassium:"
               spanID="potassiumInputInline"
@@ -159,7 +159,7 @@ export default function EditForm (props) {
             <Input
               id="quantityInput"
               name="quantity"
-              value={ingredient.quantity}
+              value={ingredient.quantity || 0}
               update={handleChange}
               label="Quantity:"
               spanID="quantityInputInline"

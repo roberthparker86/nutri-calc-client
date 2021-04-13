@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+// CSS
 import "./style/styles.css";
-import Header from "./partials/Header.js";
+// Partials
+import Header from "./components/partials/Header.js";
+import Footer from "./components/partials/Footer.js";
+// Components
 import RecipeList from "./components/uis/RecipeList.js";
-import Footer from "./partials/Footer.js";
 import AddRecipe from "./components/uis/AddRecipe.js";
 import RecipeInfo from "./components/uis/RecipeInfo.js";
 import AddIngredient from "./components/uis/AddIngredient.js";

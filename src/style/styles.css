@@ -62,7 +62,6 @@ button:not(:disabled),
 }
 
 .App {
-  opacity: 100%;
   padding-bottom: 6.4rem;
   height: 100%;
 }

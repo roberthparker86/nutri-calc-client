@@ -49,7 +49,7 @@ export default function RecipeInfo (props) {
           })
           .catch(err => {
             handleResponse({
-              severity: "success",
+              severity: "error",
               title: "Error",
               message: `Failed to delete: ${err}`
             });

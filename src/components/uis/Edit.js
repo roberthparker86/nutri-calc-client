@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import EditForm from "../form/EditForm.js";
-import { getIngredientTotal, getRecipeTotal } from "../../large_func/objCalc.js";
+import { getIngredientTotal, getRecipeTotal } from "../../other-func/objCalc.js";
 import { updateRecipeById, getRecipeById } from "../../api/index.js";
 import template from "../../obj/ingredientTemp.js";
 import ResponseAlert from "../ResponseAlert.js";

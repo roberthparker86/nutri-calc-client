@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "../btn-input/Input.js";
 import LgBtn from "../btn-input/LgBtn.js";
+import { selectText } from "../../other-func/selectText.js";
 
 export default function EditForm (props) {
     const { recipe, ingredient, handleChange, nextBtnFunc, doneBtnFunc, newIngredientList } = props;
@@ -23,6 +24,7 @@ export default function EditForm (props) {
               name="name"
               value={ingredient.name || 0}
               onChange={handleChange}
+              onFocus={selectText}
               placeholder="What's the ingredient name?"
             ></input>
           </div>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SmBtn from "../btn-input/SmBtn.js";
 import LgBtn from "../btn-input/LgBtn.js";
+import { inputValidate } from "../../other-func/inputValidate.js";
 
 export default function AddRecipe (props) {
   // changeState for UI state, updateNewRecipe for newRecipe obj state
@@ -66,8 +67,11 @@ export default function AddRecipe (props) {
         <LgBtn
           btnClass="btn btn--left"
           click={() => {
-            updateNewRecipe(newValue);
-            changeState({ addIngr: true });
+            return (
+              inputValidate(newValue.name) && inputValidate(newValue.servings)
+                ? ( updateNewRecipe(newValue), changeState({ addIngr: true }) )
+                : alert("Must input a recipe name and serving amount")
+            );            
           }}
           text="Next"
         />

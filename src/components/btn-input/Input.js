@@ -1,4 +1,5 @@
 import React from "react";
+import { selectText } from "../../other-func/selectText.js";
 
 export default function Input (props) {
   const { id, name, value, update, label, spanID, unit } = props;
@@ -14,6 +15,7 @@ export default function Input (props) {
         name={name}
         value={value}
         onChange={update}
+        onFocus={selectText}
         className="window__input window__input--stat"
         placeholder="0"
       ></input>

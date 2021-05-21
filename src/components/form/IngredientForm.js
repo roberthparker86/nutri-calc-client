@@ -1,6 +1,7 @@
 import React from "react";
 import Input from "../btn-input/Input.js";
 import LgBtn from "../btn-input/LgBtn.js";
+import { inputValidate } from "../../other-func/inputValidate.js";
 
 export default function IngredientForm (props) {
     const { recipe, ingredient, handleChange, nextBtnFunc, doneBtnFunc } = props;
@@ -171,7 +172,13 @@ export default function IngredientForm (props) {
         <LgBtn
           type="button"
           btnClass="btn btn--left"
-          click={nextBtnFunc}
+          click={() => {
+            return (
+              inputValidate(ingredient.name) && inputValidate(ingredient.quantity) && inputValidate(ingredient.calories)
+              ? nextBtnFunc()
+              : alert("You need to enter an ingredient name and quantity.")
+            );
+          }}
           text="Next"
         />
 

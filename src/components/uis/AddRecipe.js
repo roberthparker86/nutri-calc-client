@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SmBtn from "../btn-input/SmBtn.js";
 import LgBtn from "../btn-input/LgBtn.js";
 import { inputValidate } from "../../other-func/inputValidate.js";
+import Modal from "react-modal";
 
 export default function AddRecipe (props) {
   // changeState for UI state, updateNewRecipe for newRecipe obj state
@@ -12,6 +13,7 @@ export default function AddRecipe (props) {
     name: "",
     servings: ""
   });
+  const [ open, setOpen ] = useState(true);
 
   const handleChange = (event) => {
     // function to update inputs
@@ -27,6 +29,15 @@ export default function AddRecipe (props) {
   
   return (
     <div className="window window--add">
+      <Modal 
+        isOpen={open}
+        ariaHideApp={false}
+        className="modal"
+        overlayClassName="modal__overlay"
+      > 
+        <h2>Modal...</h2>
+        <p>...is totally working bro.</p>
+      </Modal>
       {/* Close btn */}
       <SmBtn
         class="sm-btn sm-btn--close"

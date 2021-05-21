@@ -4,6 +4,7 @@ import { getIngredientTotal, getRecipeTotal } from "../../other-func/objCalc.js"
 import IngredientForm from "../form/IngredientForm.js";
 import template from "../../obj/ingredientTemp.js";
 import ResponseAlert from "../ResponseAlert.js";
+import { inputValidate } from "../../other-func/inputValidate.js";
 
 export default function AddIngredient (props) {
   const { changeState, updateNewRecipe, newRecipe } = props;
@@ -123,9 +124,11 @@ export default function AddIngredient (props) {
             setNewIngredient(template);
         }}
         doneBtnFunc={() => {
-            updateList(newIngredient);
-            setNewIngredient(template);
-            setClick(true);
+          return (
+            inputValidate(newIngredient.name) && inputValidate(newIngredient.calories) && inputValidate(newIngredient.quantity)
+            ? ( updateList(newIngredient), setNewIngredient(template), setClick(true) ) 
+            : setClick(true)
+          );
         }}
       />
     </div>

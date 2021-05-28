@@ -1,13 +1,13 @@
 import React from "react";
 
 export default function ListItem (props) {
-  const { id, type, changeState, className, recipeName, calCount, value } = props;
+  const { id, type, changeUI, className, recipeName, calCount, value } = props;
 
   return (
     <button
       type={type}
       onClick={() => {
-        changeState({
+        changeUI({
           info: {
             show: true,
             id: id

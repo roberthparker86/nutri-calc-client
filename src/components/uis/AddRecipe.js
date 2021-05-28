@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import SmBtn from "../btn-input/SmBtn.js";
 import LgBtn from "../btn-input/LgBtn.js";
 import { inputValidate } from "../../other-func/inputValidate.js";
-import Modal from "react-modal";
+import GeneralMessage from "../modal/GeneralMessage.js";
 
 export default function AddRecipe (props) {
-  // changeState for UI state, updateNewRecipe for newRecipe obj state
-  const { changeState, updateNewRecipe } = props;
+  // changeUI for UI state, updateNewRecipe for newRecipe obj state
+  const { changeUI, updateNewRecipe } = props;
 
   // hook for controlling storing updating input
   const [newValue, setNewValue] = useState({
     name: "",
     servings: ""
   });
-  const [ open, setOpen ] = useState(true);
+  const [ open, setOpen ] = useState(false);
 
   const handleChange = (event) => {
     // function to update inputs
@@ -29,20 +29,20 @@ export default function AddRecipe (props) {
   
   return (
     <div className="window window--add">
-      <Modal 
+      <GeneralMessage // Error message
         isOpen={open}
-        ariaHideApp={false}
-        className="modal"
-        overlayClassName="modal__overlay"
-      > 
-        <h2>Modal...</h2>
-        <p>...is totally working bro.</p>
-      </Modal>
+        handleOpen={setOpen}
+        modalClass="modal modal--error"
+        btnClass="modal__button modal__button--error"
+        title="Error"
+        body="You must enter a recipe name and serving amount."
+      />
+
       {/* Close btn */}
       <SmBtn
         class="sm-btn sm-btn--close"
         click={() => {
-          changeState({ list: true });
+          changeUI({ list: true });
         }}
         text="x"
       />
@@ -80,8 +80,8 @@ export default function AddRecipe (props) {
           click={() => {
             return (
               inputValidate(newValue.name) && inputValidate(newValue.servings)
-                ? ( updateNewRecipe(newValue), changeState({ addIngr: true }) )
-                : alert("Must input a recipe name and serving amount")
+                ? ( updateNewRecipe(newValue), changeUI({ addIngr: true }) )
+                : setOpen(true)
             );            
           }}
           text="Next"

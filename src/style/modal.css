@@ -1,3 +1,22 @@
+:root {
+  --white: #f7f7ee;
+  --xl-green: #edf9dd;
+  --l-green: #b7e184;
+  --green: #93d147;
+  --d-green: #619523;
+  --d-blue: #0b3333;
+  --xl-orange: #fbf4c6;
+  --l-orange: #fab861;
+  --orange: #f97615;
+  --d-orange: #c75905;
+  --black: #041111;
+  --d-gray: #2f3737;
+  --d-red: #cc1b0e;
+  --red: #fa3a2c;
+  --l-red: #f8584d;
+}
+
+
 .modal__overlay {
   align-items: center;
   background-color: rgba(255, 255, 255, .75);
@@ -8,8 +27,62 @@
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 3;
 }
 
 .modal {
-  max-width: 35rem;
+  background-color: var(--xl-green);
+  border-radius: .3rem;
+  line-height: 1.25;
+  max-width: 32.5rem;
+  min-width: 27.5rem;
+  padding: 4rem;
+  text-align: center;
+  word-break: break-word;
+}
+
+.modal__title {
+  margin-bottom: 1.6rem;
+}
+
+.modal__body {
+  margin-bottom: 4rem;
+}
+
+.modal__button {
+  background-color: var(--green);
+  border: none;
+  border-radius: 5rem;
+  color: var(--white);
+  font-weight: bold;
+  padding: .8rem 1.6rem;
+}
+
+/* Error Message styles */
+.modal--error {
+  background-color: var(--d-red);
+  border: 1px solid var(--red);
+  color: var(--white);
+}
+
+.modal__button--error {
+  background-color: var(--l-red);
+}
+
+.modal__button--error:hover {
+  filter: brightness(135%);
+}
+
+/* Success Message styles */
+.modal--success {
+  background-color: var(--d-green);
+  color: var(--white);
+}
+
+.modal__button--success {
+  background-color: var(--green);
+}
+
+.modal__button--success:hover {
+  filter: brightness(115%);
 }

@@ -172,13 +172,15 @@ export default function IngredientForm (props) {
         <LgBtn
           type="button"
           btnClass="btn btn--left"
-          click={() => {
-            return (
-              inputValidate(ingredient.name) && inputValidate(ingredient.quantity) && inputValidate(ingredient.calories)
-              ? nextBtnFunc()
-              : alert("You need to enter an ingredient name and quantity.")
-            );
-          }}
+          click={ nextBtnFunc
+            //   () => {
+            //   return (
+            //     inputValidate(ingredient.name) && inputValidate(ingredient.quantity) && inputValidate(ingredient.calories)
+            //     ? nextBtnFunc()
+            //     : alert("You need to enter an ingredient name and quantity.")
+            //   );
+            // }
+          }
           text="Next"
         />
 

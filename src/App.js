@@ -58,17 +58,16 @@ export default function App() {
         <h3>Home recipe nutrition, without the guesswork.</h3>
 
         {/* UI w/ true value will render */}
-        {ui.info.show === true ? (
-          <RecipeInfo changeState={changeUI} currentId={ui.info.id} />
-        ) : ui.edit === true ? (
-          <Edit changeState={changeUI} currentId={ui.info.id} />
-        ) : ui.addRec === true ? ( 
-          <AddRecipe changeState={changeUI} updateNewRecipe={updateNewRecipe} />
-        ) : ui.addIngr === true ? (
-          <AddIngredient changeState={changeUI} updateNewRecipe={updateNewRecipe} newRecipe={newRecipe} />
-        ) : (
-          <RecipeList changeState={changeUI} />
-        )}
+        {ui.info.show === true 
+        ? ( <RecipeInfo changeUI={changeUI} currentId={ui.info.id} /> ) 
+        : ui.edit === true 
+        ? ( <Edit changeUI={changeUI} currentId={ui.info.id} /> ) 
+        : ui.addRec === true 
+        ? ( <AddRecipe changeUI={changeUI} updateNewRecipe={updateNewRecipe} /> ) 
+        : ui.addIngr === true 
+        ? ( <AddIngredient changeUI={changeUI} updateNewRecipe={updateNewRecipe} newRecipe={newRecipe} /> ) 
+        : ( <RecipeList changeUI={changeUI} /> )}
+        
       </div>
       <Footer />
     </div>

@@ -6,7 +6,7 @@ import template from "../../obj/ingredientTemp.js";
 import ResponseAlert from "../ResponseAlert.js";
 
 export default function Edit(props) {
-    const { changeState, currentId } = props;
+    const { changeUI, currentId } = props;
 
     ///// HOOKS /////
     const [ recipe, handleRecipe ] = useState({name: ""}); // Recipe to edit
@@ -58,7 +58,7 @@ export default function Edit(props) {
         }
 
         setOpen(false);
-        changeState({ list: true });
+        changeUI({ list: true });
     };
 
     ///// USE EFFECT /////    
@@ -141,14 +141,14 @@ export default function Edit(props) {
                 })
             : null
         );
-    }, [isReady, changeState, recipe]);
+    }, [isReady, changeUI, recipe]);
 
     return (
         <div className="window window--add">
             {/* Close btn */}
             <div 
                 className="sm-btn sm-btn--close"
-                onClick={() => changeState({ list: true })}
+                onClick={() => changeUI({ list: true })}
                 type="button"
             > x </div>
             

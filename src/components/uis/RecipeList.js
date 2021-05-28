@@ -15,7 +15,7 @@ export default function RecipeList(props) {
   })
 
   ///// DESTRUCTURING ASSIGNMENT /////
-  const { changeState } = props;
+  const { changeUI } = props;
 
   // Close Alert window then change UI
   const handleClose = (event, reason) => {
@@ -24,7 +24,7 @@ export default function RecipeList(props) {
     }
 
     setOpen(false);
-    changeState({ list: true });
+    changeUI({ list: true });
   };
 
   ///// USE EFFECT /////
@@ -54,7 +54,7 @@ export default function RecipeList(props) {
       {/* Close Btn */}
       <SmBtn
         class="sm-btn sm-btn--add"
-        click={() => changeState({ addRec: true })}
+        click={() => changeUI({ addRec: true })}
         text="+"
       />
 
@@ -69,7 +69,7 @@ export default function RecipeList(props) {
             key={recipe._id}
             id={recipe._id}
             type="button"
-            changeState={changeState}
+            changeUI={changeUI}
             className="window__item"
             recipeName={recipe.name}
             calCount={`${recipe.calories} Cal`}

@@ -18,7 +18,7 @@ export default function RecipeInfo (props) {
 
   ///// DESTRUCTURING ASSIGNMENT /////
   const { name, calories, protein, totFat, satFat, unsatFat, carbs, fiber, sugar, sodium, chol, potas } = recipe;
-  const { changeState, currentId } = props;
+  const { changeUI, currentId } = props;
 
   // Close Alert window then change UI
   const handleClose = (event, reason) => {
@@ -27,7 +27,7 @@ export default function RecipeInfo (props) {
     }
 
     setOpen(false);
-    changeState({ list: true });
+    changeUI({ list: true });
   };
 
   ///// USE EFFECT /////
@@ -56,7 +56,7 @@ export default function RecipeInfo (props) {
           })
         : null
     );
-  }, [deleteClick, changeState, currentId]);
+  }, [deleteClick, changeUI, currentId]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -84,7 +84,7 @@ export default function RecipeInfo (props) {
       <SmBtn
         class="sm-btn sm-btn--close"
         click={() => {
-          changeState({ list: true });
+          changeUI({ list: true });
         }}
         text="x"
       />
@@ -117,7 +117,7 @@ export default function RecipeInfo (props) {
       <LgBtn 
         btnClass="btn btn--left" 
         click={() => {
-          changeState({
+          changeUI({
             edit: true,
             info: {
               show: false,

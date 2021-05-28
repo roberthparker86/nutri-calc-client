@@ -3,11 +3,11 @@ import { insertRecipe } from "../../api/index.js";
 import { getIngredientTotal, getRecipeTotal } from "../../other-func/objCalc.js";
 import IngredientForm from "../form/IngredientForm.js";
 import template from "../../obj/ingredientTemp.js";
-import ResponseAlert from "../ResponseAlert.js";
 import { inputValidate } from "../../other-func/inputValidate.js";
+import SubmitMessage from "../modal/SubmitMessage.js";
 
 export default function AddIngredient (props) {
-  const { changeState, updateNewRecipe, newRecipe } = props;
+  const { changeUI, updateNewRecipe, newRecipe } = props;
   
   ///// Hooks /////
   const [newIngredient, setNewIngredient] = useState(template); // New ingredient
@@ -15,12 +15,13 @@ export default function AddIngredient (props) {
   const [isClicked, setClick] = useState(false); // Done btn click
   const [isUpdated, setUpdate] = useState(false); // Check if newRecipe updated
   const [postAlert, setPostAlert ] = useState({ // Post success object
-    severity: "",
     title: "",
-    message: "" 
+    body: "" 
   });
-  const [ open, setOpen ] = useState(false); // Trigger Alert open
-  
+  const [ open, setOpen ] = useState({
+    success: false,
+    error: false
+  }); // Trigger alert
   // Update newIngredient
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -38,16 +39,6 @@ export default function AddIngredient (props) {
     setList((prev) => {
       return([...prev, obj]);
     })
-  };
-
-  // Close Alert window then change UI
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-    changeState({ list: true });
   };
 
   ///// USE EFFECT /////
@@ -71,45 +62,72 @@ export default function AddIngredient (props) {
   // Post once isUpdated === true
   useEffect(() => {
     const postRecipe = async () => {
-      const handleResponse = (obj) => {
-        setPostAlert(obj);
-        setOpen(true);
-        setUpdate(false);
-      };
       return(
         (isUpdated)
           ? (insertRecipe(newRecipe)
               .then(result => {
-                handleResponse({
-                  severity: "success",
+                setPostAlert({
                   title: "Success!",
-                  message: result.data.message
+                  body: result.data.message
                 });
+                setOpen((prev) => {
+                  return ({
+                    ...prev,
+                    success: true
+                  });
+                });
+                setUpdate(false);
               })
               .catch(err => {
-                handleResponse({
-                  severity: "error",
+                setPostAlert({
                   title: "Error!",
-                  message: `Failed to create recipe: ${err}`
+                  body: `Failed to create recipe: ${err}`
                 });
+                setOpen((prev) => {
+                  return ({
+                    ...prev,
+                    error: true
+                  });
+                });
+                setUpdate(false);
               }))
           : null
       );
     };
 
     postRecipe();
-  }, [ isUpdated, newRecipe, changeState, setPostAlert, setOpen ]);
+  }, [ isUpdated, newRecipe, changeUI, setPostAlert, setOpen ]);
   
   ///// Component Return /////
   return (
     <div className="window window--add">
-      {/* POST ops response message */}
-      <ResponseAlert open={open} handleClose={handleClose} alert={postAlert} />
+      {/* Pop-up Messages */}
+      <SubmitMessage // Success Message
+        isOpen={open.success}
+        open={open}
+        handleOpen={setOpen}
+        changeUI={changeUI}
+        modalClass="modal modal--success"
+        btnClass="modal__button modal__button--success"
+        title={postAlert.title}
+        body={postAlert.body}
+      />
+
+      <SubmitMessage // Error message
+        isOpen={open.error}
+        open={open}
+        handleOpen={setOpen}
+        changeUI={changeUI}
+        modalClass="modal modal--error"
+        btnClass="modal__button modal__button--error"
+        title={postAlert.title}
+        body={postAlert.body}
+      />
       
       {/* // Clost btn */}
       <div 
         className="sm-btn sm-btn--close"
-        onClick={() => changeState({ list: true })}
+        onClick={() => changeUI({ list: true })}
         type="button"
       >
         x
@@ -120,8 +138,12 @@ export default function AddIngredient (props) {
         ingredient={newIngredient}
         handleChange={handleChange}
         nextBtnFunc={() => { 
-            updateList(newIngredient);
-            setNewIngredient(template);
+            return (
+              inputValidate(newIngredient.name) && inputValidate(newIngredient.calories) && inputValidate(newIngredient.quantity)
+                ? ( updateList(newIngredient), setNewIngredient(template) ) 
+                : ( setPostAlert({ title:"Error!", body: "You must enter an ingredient name, calorie count, and quantity."}),
+                  setOpen((prev) => ({ ...prev, error: true })) )
+            );
         }}
         doneBtnFunc={() => {
           return (

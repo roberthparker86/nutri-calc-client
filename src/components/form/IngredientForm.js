@@ -1,7 +1,6 @@
 import React from "react";
 import Input from "../btn-input/Input.js";
 import LgBtn from "../btn-input/LgBtn.js";
-import { inputValidate } from "../../other-func/inputValidate.js";
 
 export default function IngredientForm (props) {
     const { recipe, ingredient, handleChange, nextBtnFunc, doneBtnFunc } = props;

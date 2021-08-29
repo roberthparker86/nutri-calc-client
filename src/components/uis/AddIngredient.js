@@ -9,7 +9,7 @@ import SubmitMessage from "../modal/SubmitMessage.js";
 export default function AddIngredient (props) {
   const { changeUI, updateNewRecipe, newRecipe } = props;
   
-  ///// Hooks /////
+  /// Hooks ///
   const [newIngredient, setNewIngredient] = useState(template); // New ingredient
   const [list, setList] = useState([]); // Ingredient array
   const [isClicked, setClick] = useState(false); // Done btn click
@@ -41,7 +41,7 @@ export default function AddIngredient (props) {
     })
   };
 
-  ///// USE EFFECT /////
+  /// USE EFFECT ///
   // Prepare data for post
   useEffect(() => {
     const mergeRecipe = () => {
@@ -98,7 +98,7 @@ export default function AddIngredient (props) {
     postRecipe();
   }, [ isUpdated, newRecipe, changeUI, setPostAlert, setOpen ]);
   
-  ///// Component Return /////
+  /// Component Return ///
   return (
     <div className="window window--add">
       {/* Pop-up Messages */}
@@ -124,7 +124,7 @@ export default function AddIngredient (props) {
         body={postAlert.body}
       />
       
-      {/* // Clost btn */}
+      {/* Close btn */}
       <div 
         className="sm-btn sm-btn--close"
         onClick={() => changeUI({ list: true })}

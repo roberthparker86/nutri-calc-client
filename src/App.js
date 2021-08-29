@@ -12,7 +12,7 @@ import AddIngredient from "./components/uis/AddIngredient.js";
 import Edit from "./components/uis/Edit.js";
 
 export default function App() {
-  ///// UI /////
+  /// UI ///
   const defaultUi = {
     list: false,    // RecipeList.js
     addRec: false,  // AddRecipe.js
@@ -38,7 +38,7 @@ export default function App() {
     });
   };
 
-  ///// NEW RECIPE /////
+  /// NEW RECIPE ///
   const [newRecipe, handleNewRecipe] = useState({ });
 
   const updateNewRecipe = (obj) => {

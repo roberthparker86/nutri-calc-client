@@ -4,10 +4,10 @@ import LgBtn from "../btn-input/LgBtn.js";
 import { selectText } from "../../other-func/selectText.js";
 
 export default function EditForm (props) {
-    const { recipe, ingredient, handleChange, nextBtnFunc, doneBtnFunc, newIngredientList } = props;
+    const { recipe, ingredient, handleChange, nextBtnFunc, doneBtnFunc } = props;
 
     return(
-        <form id="ingredienInfo">
+        <form id="ingredientInfo">
         <div className="window__input-container">
           <h3 className="window__label--name" htmlFor="recipeName">
             {recipe.name || ""}
@@ -22,7 +22,7 @@ export default function EditForm (props) {
               className="window__input window__input--recipe-name"
               id="ingredientName"
               name="name"
-              value={ingredient.name || 0}
+              value={ingredient.name || ''}
               onChange={handleChange}
               onFocus={selectText}
               placeholder="What's the ingredient name?"
@@ -179,15 +179,11 @@ export default function EditForm (props) {
 
         <hr className="window__hr--add-bot" />
         {/* Done Btn */}
-        { (recipe.ingredients !== undefined)
-            ? (recipe.ingredients.length === newIngredientList.length)
-                ? (<LgBtn
-                btnClass="btn btn--right"
-                click={doneBtnFunc}
-                text="Done"
-                />)
-                : null
-            : null }
+        <LgBtn
+          btnClass="btn btn--right"
+          click={doneBtnFunc}
+          text="Done"
+        />
         
       </form>
     );

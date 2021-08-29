@@ -211,6 +211,7 @@ footer,
 
 /* Done & Next Btn */
 .btn--left,
+.btn--center,
 .btn--right {
   background-color: var(--orange);
   bottom: 0;
@@ -222,6 +223,10 @@ footer,
 
 .btn--left {
   left: 20%;
+}
+
+.btn--center {
+  left: 45%;
 }
 
 .btn--right {

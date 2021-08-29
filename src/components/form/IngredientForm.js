@@ -3,10 +3,16 @@ import Input from "../btn-input/Input.js";
 import LgBtn from "../btn-input/LgBtn.js";
 
 export default function IngredientForm (props) {
-    const { recipe, ingredient, handleChange, nextBtnFunc, doneBtnFunc } = props;
+    const { 
+      recipe, 
+      ingredient, 
+      handleChange, 
+      nextBtnFunc, 
+      doneBtnFunc 
+    } = props;
 
     return(
-        <form id="ingredienInfo">
+        <form id="ingredientInfo">
         <div className="window__input-container">
           <h3 className="window__label--name" htmlFor="recipeName">
             {recipe.name}

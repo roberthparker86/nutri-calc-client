@@ -3,7 +3,7 @@ import EditForm from "../form/EditForm.js";
 import { getIngredientTotal, getRecipeTotal } from "../../other-func/objCalc.js";
 import { updateRecipeById, getRecipeById } from "../../api/index.js";
 import template from "../../obj/ingredientTemp.js";
-import { inputValidate } from "../../other-func/inputValidate.js";
+import { validateRequiredData, ingredientsAreSame } from "../../other-func/inputValidate.js";
 import SubmitMessage from "../modal/SubmitMessage.js";
 
 export default function Edit(props) {
@@ -73,13 +73,18 @@ export default function Edit(props) {
 
 		// Select ingredient to populate EditForm inputs
 		useEffect(() => {
-				return( isLoaded 
-						? (newIngredientList.length === recipe.ingredients.length)
-								// EditForm populates w/ last updated ingredient obj if true
-								? (setCurrentIngredient(newIngredientList[count]), setLoaded(false))
-								// EditForm populates with next item in recipe.ingredient list if false
-								: (setCurrentIngredient(recipe.ingredients[count]), setLoaded(false))
-						: null)
+				if (isLoaded) {
+
+					if (newIngredientList.length === recipe.ingredients.length) {
+						setCurrentIngredient(newIngredientList[count]);
+						setLoaded(false);
+
+					} else {
+						setCurrentIngredient(recipe.ingredients[count]);
+						setLoaded(false);
+					}
+
+				}
 		}, [isLoaded, count, newIngredientList, recipe.ingredients]);
 
 		// Prepare updated data for PUT ops
@@ -98,51 +103,36 @@ export default function Edit(props) {
 				};
 
 				if (isClicked) {
-					const instancesOfCurrentRecipe = newIngredientList.filter((ingredient) => ingredient.name === currentIngredient.name);
-
-					if ( instancesOfCurrentRecipe.length === 0) {
-						updateList(currentIngredient);
-						mergeIngredients();
-						setClick(false);
-						setReady(true);
-
-					} else {
-						mergeIngredients();
-						setClick(false);
-						setReady(true);
-					}
+					mergeIngredients();
+					setClick(false);
+					setReady(true);
 				}
 
-				// return( 
-				// 		(isClicked)
-				// 		? (mergeIngredients(), setClick(false), setReady(true))
-				// 		: null
-				// );
 		}, [ isClicked, setLoaded, currentIngredient, newIngredientList, recipe.servings ]);
 
 		// isReady === true, move forward with PUT ops using recipe obj
 		useEffect(() => {
-				return(
-						(isReady)
-						? updateRecipeById(recipe._id, recipe)
-								.then( res => {
-									setPostAlert({
-										title: "Success!",
-										body: res.data.message
-									});
-									setOpen({ success: true, error: false });
-									setReady(false);
-								})
-								.catch(err => {
-									setPostAlert({
-										title: "Error",
-										body: `Failed to update: ${err}`
-									});
-									setOpen({ success: false, error: true });
-									setReady(false);
-								})
-						: null
-				);
+
+				if (isReady) {
+					updateRecipeById(recipe._id, recipe)
+						.then(res => {
+							setPostAlert({
+								title: "Success!",
+								body: res.data.message
+							});
+							setOpen({ success: true, error: false });
+							setReady(false);
+						})
+						.catch(error => {
+							setPostAlert({
+								title: "Error",
+								body: `Failed to update: ${error}`
+							});
+							setOpen({ success: false, error: true });
+							setReady(false);
+						});
+				}
+
 		}, [isReady, changeUI, recipe]);
 
 		return (
@@ -184,9 +174,7 @@ export default function Edit(props) {
 					ingredient={currentIngredient}
 					handleChange={handleChange}
 					nextBtnFunc={() => {
-						if ( inputValidate(currentIngredient.name) && 
-							inputValidate(currentIngredient.calories) && 
-							inputValidate(currentIngredient.quantity)) {
+						if ( validateRequiredData(currentIngredient) ) {
 
 								if (!checkMaxCount()) {
 									updateList(currentIngredient);
@@ -203,24 +191,43 @@ export default function Edit(props) {
 									if (instancesOfCurrentRecipe.length === 0) {
 										updateList(currentIngredient);
 										setCurrentIngredient(template);
+
 									} else {
 										setCurrentIngredient(template);
 									}
 								}
 						}
+					}}
 
-						// return(
-						// 	inputValidate(currentIngredient.name) && inputValidate(currentIngredient.calories) && inputValidate(currentIngredient.quantity)
-						// 		? !checkMaxCount()
-						// 			? ( updateList(currentIngredient), setCount(count + 1), setLoaded(true) )
-						// 			: (newIngredientList.length !== recipe.ingredients.length) && ( updateList(currentIngredient), setLoaded(true) )
-						// 		: ( setPostAlert({ title: "Error!", body: "You must input an ingredient name, calorie amount, and quantity." }), 
-						// 				setOpen((prev) => ({ ...prev, error: true })) )
-						// );
-					}}
 					doneBtnFunc={() => {
-						setClick(true);
+						const instancesOfCurrentRecipe = newIngredientList.filter((ingredient) => ingredient.name === currentIngredient.name);
+						const originalIngredientsArray = recipe.ingredients;
+
+						if (newIngredientList.length !== originalIngredientsArray.length) {
+							const missingIngredients = originalIngredientsArray.filter((ingredient, index) => {
+								return (!newIngredientList[index])
+									? null
+									: (ingredient.name !== newIngredientList[index].name)
+									? ingredient
+									: null;
+							});
+
+							missingIngredients.forEach((ingredient) => {
+								return updateList(ingredient);
+							});
+						};
+
+						if ( instancesOfCurrentRecipe.length === 0 || !ingredientsAreSame(currentIngredient, recipe.ingredients[count]) ) {
+							if ( validateRequiredData(currentIngredient) ) {
+								updateList(currentIngredient); 
+								setClick(true);
+							};
+
+						} else {
+							setClick(true);
+						}
 					}}
+
 					newIngredientList={ newIngredientList }
 				/>
 			</div>

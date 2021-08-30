@@ -4,7 +4,7 @@ import LgBtn from "../btn-input/LgBtn.js";
 import { selectText } from "../../other-func/selectText.js";
 
 export default function EditForm (props) {
-    const { recipe, ingredient, handleChange, nextBtnFunc, doneBtnFunc } = props;
+    const { recipe, ingredient, handleChange, checkMaxCount, nextBtnFunc, doneBtnFunc } = props;
 
     return(
         <form id="ingredientInfo">
@@ -179,11 +179,14 @@ export default function EditForm (props) {
 
         <hr className="window__hr--add-bot" />
         {/* Done Btn */}
-        <LgBtn
-          btnClass="btn btn--right"
-          click={doneBtnFunc}
-          text="Done"
-        />
+        {checkMaxCount()
+          ? ( 
+            <LgBtn
+                btnClass="btn btn--right"
+                click={doneBtnFunc}
+                text="Done"
+              /> )
+          : null }
         
       </form>
     );

@@ -10,7 +10,7 @@ export default function Edit(props) {
 		const { changeUI, currentId } = props;
 
 		/// HOOKS ///
-		const [ recipe, handleRecipe ] = useState({name: ""}); // Recipe to edit
+		const [ recipe, handleRecipe ] = useState({ name: "", ingredients: [] }); // Recipe to edit
 		const [ currentIngredient, setCurrentIngredient ] = useState(template); // Current ingredient displayed/ edited
 		const [ newIngredientList, setNewIngredientList ] = useState([]); // Array holds updated ingredient objs
 		const [ count, setCount ] = useState(0); // Count for capping Next btn clicks and indexing
@@ -173,6 +173,7 @@ export default function Edit(props) {
 					recipe={recipe}
 					ingredient={currentIngredient}
 					handleChange={handleChange}
+					checkMaxCount={checkMaxCount}
 					nextBtnFunc={() => {
 						if ( validateRequiredData(currentIngredient) ) {
 
@@ -201,27 +202,15 @@ export default function Edit(props) {
 
 					doneBtnFunc={() => {
 						const instancesOfCurrentRecipe = newIngredientList.filter((ingredient) => ingredient.name === currentIngredient.name);
-						const originalIngredientsArray = recipe.ingredients;
 
-						if (newIngredientList.length !== originalIngredientsArray.length) {
-							const missingIngredients = originalIngredientsArray.filter((ingredient, index) => {
-								return (!newIngredientList[index])
-									? null
-									: (ingredient.name !== newIngredientList[index].name)
-									? ingredient
-									: null;
-							});
-
-							missingIngredients.forEach((ingredient) => {
-								return updateList(ingredient);
-							});
-						};
-
-						if ( instancesOfCurrentRecipe.length === 0 || !ingredientsAreSame(currentIngredient, recipe.ingredients[count]) ) {
-							if ( validateRequiredData(currentIngredient) ) {
+						if ( validateRequiredData(currentIngredient) ) {
+							if  ( instancesOfCurrentRecipe.length === 0 || !ingredientsAreSame(currentIngredient, recipe.ingredients[count]) ) {
 								updateList(currentIngredient); 
 								setClick(true);
-							};
+
+							} else {
+								setClick(true);
+							}
 
 						} else {
 							setClick(true);
